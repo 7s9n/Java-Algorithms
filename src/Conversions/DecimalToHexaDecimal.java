@@ -1,6 +1,6 @@
 package Conversions;
 
-import java.lang.ref.PhantomReference;
+import java.util.*;
 
 public class DecimalToHexaDecimal {
     private final static byte numOfDigit = 8;
