@@ -25,7 +25,7 @@ public class DecimalToBinary {
      * @return binary form of the decimal.
      */
     public static int decimalToBinaryBitWise(int decimal){
-        int b = 0 , c = 0 , bit = 0;
+        int b = 0 , c = 0 , bit;
         while (decimal != 0){
             bit = (decimal & 0x1);
             b += bit * (int)Math.pow(10 , c++);
