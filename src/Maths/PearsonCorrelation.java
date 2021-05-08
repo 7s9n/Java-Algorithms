@@ -11,10 +11,10 @@ public class PearsonCorrelation {
     }
 
     /**
-     * This method computes Pearson's correlation coefficients
-     * @param x values
-     * @param y values
-     * @return correlation coefficients
+     * This method computes Pearson's correlation coefficients.
+     * @param x values.
+     * @param y values.
+     * @return the correlation coefficient between two data sets.
      */
     public static double getPearsonCorrelation(int[] x , int[] y){
         int len = x.length;
@@ -38,7 +38,7 @@ public class PearsonCorrelation {
      * It's another implementation for Pearson's correlation coefficients.
      * @param x values
      * @param y values
-     * @return correlation coefficients
+     * @return the correlation coefficient between two data sets.
      */
     public static double getPearsonCorrelation2(int[] x , int[] y){
         if (x.length != y.length || x.length < 0){
