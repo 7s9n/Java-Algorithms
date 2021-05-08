@@ -9,7 +9,7 @@ public class MidPoint {
      *
      * @param lowerBoundary argument
      * @param upperBoundary argument
-     * @return  class midpoint
+     * @return  class midpoint.
      */
     public static double getMidPoint(int lowerBoundary , int upperBoundary){
         if (lowerBoundary > upperBoundary){
