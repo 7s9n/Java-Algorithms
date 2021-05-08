@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class StandardDeviation {
     public static void main (String[] args) {
+        // test
         System.out.println(getStandardDeviationP(2, 3 , 7 , 4 ));
         System.out.println(getStandardDeviationS(2, 3 , 7 , 4 ));
     }
