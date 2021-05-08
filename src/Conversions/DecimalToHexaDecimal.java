@@ -21,7 +21,7 @@ public class DecimalToHexaDecimal {
     }
     /***
      * This is a recursive method .
-     * @param num to be converted
+     * @param num to be converted .
      * @return the hex value of the given num.
      */
     public static String toHex(int num){
