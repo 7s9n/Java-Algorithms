@@ -12,7 +12,7 @@ public class Mode {
         /* Test array of integers */
         assert (getMode(new int[] {})) == null;
         assert Arrays.equals(getMode(new int[] {5}), new int[] {5});
-        assert Arrays.equals(getMode(new int[] {1, 2, 3, 4, 5}), new int[] {1, 2, 3, 4, 5});
+        assert Arrays.equals(getMode(new int[] {6, 3, 9, 6, 6, 5, 9, 3}), new int[] {6});
         assert Arrays.equals(getMode(new int[] {7, 9, 9, 4, 5, 6, 7, 7, 8}), new int[] {7});
         assert Arrays.equals(getMode(new int[] {7, 9, 9, 4, 5, 6, 7, 7, 9}), new int[] {7, 9});
         for (int n : getMode(new int[]{1,2})){
