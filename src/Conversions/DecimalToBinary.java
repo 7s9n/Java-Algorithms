@@ -1,5 +1,9 @@
 package Conversions;
 
+/**
+ *  This class converts a Decimal number to a Binary number .
+ *
+ */
 public class DecimalToBinary {
     public static void main (String[] args) {
         System.out.println(decimalToBinary(200));
@@ -14,6 +18,12 @@ public class DecimalToBinary {
         }
         return b;
     }
+
+    /***
+     * This method converts a decimal number to a binary number using a bitwise algorithm.
+     * @param decimal
+     * @return binary form of the decimal.
+     */
     public static int decimalToBinaryBitWise(int decimal){
         int b = 0 , c = 0 , bit = 0;
         while (decimal != 0){
