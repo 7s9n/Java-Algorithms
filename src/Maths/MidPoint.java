@@ -13,7 +13,7 @@ public class MidPoint {
      */
     public static double getMidPoint(int lowerBoundary , int upperBoundary){
         if (lowerBoundary > upperBoundary){
-            throw new RuntimeException("Lower boundary is grater than the upper boundary");
+            throw new RuntimeException("Lower boundary is greater than the upper boundary");
         }
         return (lowerBoundary + upperBoundary) / 2;
     }
