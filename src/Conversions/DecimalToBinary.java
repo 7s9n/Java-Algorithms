@@ -36,7 +36,7 @@ public class DecimalToBinary {
     public static int decimalToBinaryBitWise(int decimal){
         int b = 0 , c = 0 , bit;
         while (decimal != 0){
-            bit = (decimal & 0x1);
+            bit = (decimal & 0b1);
             b += bit * (int)Math.pow(10 , c++);
             decimal >>= 1;
         }
