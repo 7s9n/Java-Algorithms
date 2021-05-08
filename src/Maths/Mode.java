@@ -15,7 +15,7 @@ public class Mode {
         assert Arrays.equals(getMode(new int[] {6, 3, 9, 6, 6, 5, 9, 3}), new int[] {6});
         assert Arrays.equals(getMode(new int[] {7, 9, 9, 4, 5, 6, 7, 7, 8}), new int[] {7});
         assert Arrays.equals(getMode(new int[] {7, 9, 9, 4, 5, 6, 7, 7, 9}), new int[] {7, 9});
-        for (int n : getMode(new int[]{1,2})){
+        for (int n : getMode(new int[]{1 , 2 , 2})){
             System.out.print(n + " ");
         }
     }
@@ -35,7 +35,7 @@ public class Mode {
         int max_freq = Collections.max(freq.values());
         List<Integer> result = new ArrayList<>();
         for(int key : freq.keySet()){
-            if (freq.get(key) == max_freq)result.add(key);
+            if (freq.get(key) == max_freq && max_freq > 1)result.add(key);
         }
         return result.stream().mapToInt(v -> v).toArray();
     }
