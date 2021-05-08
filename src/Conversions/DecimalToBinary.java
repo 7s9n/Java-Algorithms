@@ -8,8 +8,8 @@ public class DecimalToBinary {
     public static void main (String[] args) {
         // test 200 times
         for (int i = 0; i < 200; i++) {
-            assert decimalToBinary(i) == Integer.valueOf(String.valueOf(i) , 2);
-            assert decimalToBinaryBitWise(i) == Integer.valueOf(String.valueOf(i) , 2);
+            assert Integer.parseInt(Integer.toBinaryString(i)) == decimalToBinary(i);
+            assert Integer.parseInt(Integer.toBinaryString(i)) == decimalToBinaryBitWise(i);
         }
     }
 
