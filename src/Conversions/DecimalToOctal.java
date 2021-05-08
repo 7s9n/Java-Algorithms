@@ -1,4 +1,7 @@
 package Conversions;
+/**
+ * This class converts Decimal numbers to Octal Numbers.
+ */
 
 public class DecimalToOctal {
     public static void main (String[] args) {
