@@ -2,13 +2,22 @@ package Conversions;
 
 /**
  *  This class converts a Decimal number to a Binary number .
- *
  */
 public class DecimalToBinary {
+
     public static void main (String[] args) {
-        System.out.println(decimalToBinary(200));
-        System.out.println(decimalToBinaryBitWise(200));
+        // test 200 times
+        for (int i = 0; i < 200; i++) {
+            assert decimalToBinary(i) == Integer.valueOf(String.valueOf(i) , 2);
+            assert decimalToBinaryBitWise(i) == Integer.valueOf(String.valueOf(i) , 2);
+        }
     }
+
+    /**
+     * This method converts a decimal number to a binary number using a conventional algorithm.
+     * @param decimal
+     * @return binary form of the decimal.
+     */
     public static int decimalToBinary(int decimal){
         int bit = 0, b = 0 , c = 0 ;
         while (decimal != 0){
