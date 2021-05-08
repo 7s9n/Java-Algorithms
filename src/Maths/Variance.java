@@ -7,9 +7,10 @@ public class Variance {
         // test
         System.out.println(getVarianceP(2, 3 , 7 , 4 ));
         System.out.println(getVarianceS(2, 3 , 7 , 4 ));
+        System.out.println(getVarianceS(1)); // gives error.
     }
     /**
-     * This  method calculates variance based on the entire population given as argument.
+     * This method calculates variance based on the entire population given as argument.
      * @param values data set (argument).
      * @return variance of the given data set.
      */
@@ -29,7 +30,7 @@ public class Variance {
      */
     public static double getVarianceS(int ... values){
         if (values.length <= 1){
-            throw new RuntimeException("data set must be at least 2 numbers");
+            throw new RuntimeException("Error: You may enter at least 2 values.");
         }
         double mean = Arrays.stream(values).sum() / values.length;
         double variance = 0.0;
