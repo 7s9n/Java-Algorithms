@@ -9,7 +9,7 @@ import java.util.List;
 public class MeanOfGroupedData {
 
     public static void main (String[] args) {
-        Table dataSet = new Table(22 , 32,5);
+        Table dataSet = new Table(20 , 100,8);
         System.out.println("Mean: " + dataSet.getMean());
     }
 }
