@@ -9,9 +9,10 @@ import java.util.List;
 public class MeanOfGroupedData {
 
     public static void main (String[] args) {
-        Table dataSet = new Table(20 , 100,8);
+        Table dataSet = new Table(22 , 32,5);
         System.out.println("Mean: " + dataSet.getMean());
         System.out.println("Median: " + dataSet.getMedian());
+        System.out.println("Mode: " + dataSet.getMode());
     }
 }
 class Pair{
@@ -77,7 +78,7 @@ class Table{
         }
     }
     public double getMode(){
-
+        return (3 * this.getMedian()) - (2 * getMean());
     }
     public double getMedian(){
         int l; //lower limit of the median class.
