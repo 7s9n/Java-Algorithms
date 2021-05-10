@@ -1,15 +1,13 @@
 package DataStructures.Stack;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 
-class People{
+class Person {
     private final int id;
     private final String name;
 
-    public People (int id, String name) {
+    public Person (int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -24,15 +22,21 @@ class People{
 }
 public class StackOfLinkedList {
     public static void main (String[] args) {
-        MyStack<People> stk = new MyStack<>();
-        stk.add(new People(1 , "Hussein Sarea"));
-        stk.add(new People(2 , "Moataz Sarea"));
-        stk.add(new People(3, "Ekram Sarea"));
-        var it = stk.iterator();
-        it.forEachRemaining((person) ->{
-            System.out.println("ID: " + person.getId());
-            System.out.println("Name: " + person.getName());
+        MyStack<Person> stk = new MyStack<>();
+        stk.addAll(
+                new Person(1 , "Hussein Sarea") ,
+                new Person(2 , "Moataz Sarea") ,
+                new Person(3, "Ekram Sarea")
+        );
+
+        stk.pop();
+
+        var it = stk.iterator(); // Iterator<Person>
+        it.forEachRemaining(person -> {
+            System.out.println(person.getId());
+            System.out.println(person.getName());
         });
+
     }
 }
 class MyStack<T> implements Iterable<T> {
@@ -55,9 +59,11 @@ class MyStack<T> implements Iterable<T> {
         }
     }
     private ListNode<T> head;
+
     public MyStack(){
         this.head = null;
     }
+
     public void add(T val){
         this.head = new MyStack<T>.ListNode<>(val ,this.head);
     }
@@ -68,6 +74,11 @@ class MyStack<T> implements Iterable<T> {
         ListNode<T> oldHead = this.head;
         this.head = this.head.next;
         oldHead = null;
+    }
+    public void addAll(T... values){
+        for (T value : values){
+            this.add(value);
+        }
     }
     public T top() {
         if (this.empty()){
