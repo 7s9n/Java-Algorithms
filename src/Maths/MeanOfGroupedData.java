@@ -9,8 +9,9 @@ import java.util.List;
 public class MeanOfGroupedData {
 
     public static void main (String[] args) {
-        Table dataSet = new Table(22 , 32,5);
+        Table dataSet = new Table(20 , 100,8);
         System.out.println("Mean: " + dataSet.getMean());
+        System.out.println("Median: " + dataSet.getMedian());
     }
 }
 class Pair{
@@ -36,11 +37,14 @@ class Classes{
         this.classes = new Pair(lower , upper);
         this.frequency = frequency;
     }
-    public double getFrequency(){
+    public int getFrequency(){
         return this.frequency;
     }
     public double getMidPoint(){
         return (this.classes.getUpper() + this.classes.getLower()) / 2.0;
+    }
+    public int getLower(){
+        return this.classes.getLower();
     }
     @Override
     public String toString(){
@@ -49,7 +53,8 @@ class Classes{
 }
 class Table{
     private List<Classes> classesList;
-    private int totalFrequency;
+    private int classLength;
+    private int totalFrequency; //total number of observations / frequency.
     private double totalFrequencyMulByMid;
     public Table(int lower , int upper , int numOfClasses){
         classesList = new ArrayList<>();
@@ -57,29 +62,41 @@ class Table{
         this.initVariable();
     }
     private void generateTable(int lower , int upper , int numOfClasses){
-        int range = upper - lower , classLength = Math.round(range / numOfClasses) , freq = 0;
+        int range = upper - lower , freq = 0;
+        this.classLength = Math.round(range / numOfClasses);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         for (int i = 0; i < numOfClasses; i++) {
-            System.out.print("Enter frequency of " + lower + " - " + (lower + classLength) + ": ");
+            System.out.print("Enter frequency of " + lower + " - " + (lower + this.classLength) + ": ");
             try {
                 freq = Integer.parseInt(reader.readLine());
             } catch (IOException e) {
                 //Handle exception ....
             }
-            classesList.add(new Classes(lower , lower + classLength , freq));
-            lower += classLength;
+            classesList.add(new Classes(lower , (lower + this.classLength) , freq));
+            lower += this.classLength;
         }
     }
-    public double getMedian(){
-        int l = 0 ; //lower limit of the median class.
-        int f = 0 ; //frequency of the median class.
-        int F = 0 ; //cumulative frequency of the class preceding the median class.
-        int n = 0 ; //total number of observations / frequency.
-        int h = 0 ; //width of the median class.
-        for (Classes c : classesList){
+    public double getMode(){
 
+    }
+    public double getMedian(){
+        int l; //lower limit of the median class.
+        int f; //frequency of the median class.
+        int F; //cumulative frequency of the class preceding the median class.
+        int prev; // previous Cumulative Frequency
+        int cur = classesList.get(0).getFrequency(); // current Cumulative Frequency
+        double n = totalFrequency / 2; // Median Class
+        for (int i = 1; i < classesList.size(); i++) {
+            prev = cur;
+            cur = prev + classesList.get(i).getFrequency();
+            if (cur > n){
+                f = classesList.get(i).getFrequency(); //frequency of the median class.
+                F = prev; //cumulative frequency of the class preceding the median class.
+                l = classesList.get(i).getLower();
+                return l + (((n - F) / f) * classLength);
+            }
         }
-        return 00.0;
+        return 0.0;
     }
     public double getMean(){
         return totalFrequencyMulByMid / this.totalFrequency;
