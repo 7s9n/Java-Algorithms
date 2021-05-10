@@ -9,7 +9,7 @@ import java.util.List;
 public class MeanOfGroupedData {
 
     public static void main (String[] args) {
-        Table dataSet = new Table(22 , 32,5);
+        Table dataSet = new Table(51 , 70,4,true);
         System.out.println("Mean: " + dataSet.getMean());
         System.out.println("Median: " + dataSet.getMedian());
         System.out.println("Mode: " + dataSet.getMode());
@@ -57,12 +57,15 @@ class Table{
     private int classLength;
     private int totalFrequency; //total number of observations / frequency.
     private double totalFrequencyMulByMid;
-    public Table(int lower , int upper , int numOfClasses){
+    public Table(int lower , int upper , int numOfClasses , boolean flag){
         classesList = new ArrayList<>();
-        this.generateTable(lower , upper , numOfClasses);
+        this.generateTable(lower , upper , numOfClasses , flag);
         this.initVariable();
     }
-    private void generateTable(int lower , int upper , int numOfClasses){
+    public Table(int lower , int upper , int numOfClasses){
+        this(lower , upper , numOfClasses , false);
+    }
+    private void generateTable(int lower , int upper , int numOfClasses , boolean flag){
         int range = upper - lower , freq = 0;
         this.classLength = Math.round(range / numOfClasses);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -74,11 +77,28 @@ class Table{
                 //Handle exception ....
             }
             classesList.add(new Classes(lower , (lower + this.classLength) , freq));
+            if (flag)++lower;
             lower += this.classLength;
         }
+        if (flag)++classLength;
     }
     public double getMode(){
-        return (3 * this.getMedian()) - (2 * getMean());
+        int l = 0; // lower class boundary of the modal group
+        int prevFreq = 0; //the frequency of the group before the modal group
+        int f = Integer.MIN_VALUE; //the frequency of the modal group
+        int nextFreq = 0; //the frequency of the group after the modal group
+        for (int i = 1; i < classesList.size(); i++) {
+            if (classesList.get(i).getFrequency() > f){
+                l = classesList.get(i).getLower();
+                f = classesList.get(i).getFrequency();
+                if (i > 0 && i < classesList.size() - 1){
+                    prevFreq = classesList.get(i - 1).getFrequency();
+                    nextFreq = classesList.get(i + 1).getFrequency();
+                }
+            }
+        }
+        return l + ((f - prevFreq) / (double)( (f - prevFreq) + (f - nextFreq) )) * this.classLength;
+        //return (3 * this.getMedian()) - (2 * getMean()); you can use this instead.
     }
     public double getMedian(){
         int l; //lower limit of the median class.
