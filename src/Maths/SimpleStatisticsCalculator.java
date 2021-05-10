@@ -9,7 +9,7 @@ import java.util.List;
 public class SimpleStatisticsCalculator {
 
     public static void main (String[] args) {
-        Table dataSet = new Table(10, 80,7);
+        Table dataSet = new Table(10, 50,4);
         System.out.println("Mean: " + dataSet.getMean());
         System.out.println("Median: " + dataSet.getMedian());
         System.out.println("Mode: " + dataSet.getMode());
@@ -59,7 +59,7 @@ class Table{
     private int classLength;
     private int totalFrequency; //total number of observations / frequency.
     private double totalFrequencyMulByMid;
-    private double tfm; // frequency * ((midpoint - mean) ^ 2)
+    private double tfmm; // ( frequency * midpoint) * midpoint
     public Table(int lower , int upper , int numOfClasses , boolean flag){
         classesList = new ArrayList<>();
         this.generateTable(lower , upper , numOfClasses , flag);
@@ -86,7 +86,7 @@ class Table{
         if (flag)++classLength;
     }
     public double getVariance(){
-        return tfm / totalFrequency;
+        return (this.tfmm / totalFrequency) - Math.pow(getMean(),2);
     }
     public double getStandardDeviation(){
         return Math.sqrt(this.getVariance());
@@ -135,10 +135,7 @@ class Table{
         for (Classes c : classesList){
             totalFrequency += c.getFrequency();
             totalFrequencyMulByMid += c.getFrequency() * c.getMidPoint();
-        }
-        var mean = getMean();
-        for (Classes c : classesList){
-            tfm += c.getFrequency() * Math.pow((c.getMidPoint() - mean) , 2);
+            tfmm += (c.getFrequency() * c.getMidPoint()) * c.getMidPoint();
         }
     }
 }
