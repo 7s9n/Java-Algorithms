@@ -9,10 +9,12 @@ import java.util.List;
 public class MeanOfGroupedData {
 
     public static void main (String[] args) {
-        Table dataSet = new Table(51 , 70,4,true);
+        Table dataSet = new Table(10, 80,7);
         System.out.println("Mean: " + dataSet.getMean());
         System.out.println("Median: " + dataSet.getMedian());
         System.out.println("Mode: " + dataSet.getMode());
+        System.out.println("Variance: " + dataSet.getVariance());
+        System.out.println("Standard deviation: " + dataSet.getStandardDeviation());
     }
 }
 class Pair{
@@ -57,6 +59,7 @@ class Table{
     private int classLength;
     private int totalFrequency; //total number of observations / frequency.
     private double totalFrequencyMulByMid;
+    private double tfm; // frequency * ((midpoint - mean) ^ 2)
     public Table(int lower , int upper , int numOfClasses , boolean flag){
         classesList = new ArrayList<>();
         this.generateTable(lower , upper , numOfClasses , flag);
@@ -81,6 +84,12 @@ class Table{
             lower += this.classLength;
         }
         if (flag)++classLength;
+    }
+    public double getVariance(){
+        return tfm / totalFrequency;
+    }
+    public double getStandardDeviation(){
+        return Math.sqrt(this.getVariance());
     }
     public double getMode(){
         int l = 0; // lower class boundary of the modal group
@@ -126,6 +135,10 @@ class Table{
         for (Classes c : classesList){
             totalFrequency += c.getFrequency();
             totalFrequencyMulByMid += c.getFrequency() * c.getMidPoint();
+        }
+        var mean = getMean();
+        for (Classes c : classesList){
+            tfm += c.getFrequency() * Math.pow((c.getMidPoint() - mean) , 2);
         }
     }
 }
