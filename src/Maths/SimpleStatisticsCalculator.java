@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MeanOfGroupedData {
+public class SimpleStatisticsCalculator {
 
     public static void main (String[] args) {
         Table dataSet = new Table(10, 80,7);
