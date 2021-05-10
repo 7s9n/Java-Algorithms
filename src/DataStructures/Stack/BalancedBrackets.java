@@ -2,7 +2,7 @@ package DataStructures.Stack;
 
 import java.util.Stack;
 
-public class BalancedBrackets {
+public class BalancedBrackets{
     public static void main (String[] args) {
         System.out.println(isBalanced("((1+1) * (2))"));
         System.out.println(isBalanced("<({[]})>[]"));
