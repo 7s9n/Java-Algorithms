@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * this implementation hasn't tested , it's a quick implementation.
+ * this implementation hasn't been tested , it's a quick implementation.
  * so feel free to edit it .
  */
 public class SimpleStatisticsCalculator {
