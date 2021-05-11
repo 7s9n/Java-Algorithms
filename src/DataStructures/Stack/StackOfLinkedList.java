@@ -21,6 +21,10 @@ public class StackOfLinkedList {
  * <p>Contains all the stack methods : push, pop, printStack, isEmpty
  */
 class MyStack<T> implements Iterable<T> {
+    /**
+     * Nodes class
+     * @param <T>
+     */
     private class ListNode<T>{
         private T val;
         private ListNode<T> next;
