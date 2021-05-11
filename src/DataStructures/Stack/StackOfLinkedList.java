@@ -3,52 +3,23 @@ package DataStructures.Stack;
 import java.util.*;
 import java.util.function.Consumer;
 
-class Person {
-    private final int id;
-    private final String name;
+// An implementation of a Stack using a Linked List
 
-    public Person (int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public int getId () {
-        return id;
-    }
-
-    public String getName () {
-        return name;
-    }
-}
 public class StackOfLinkedList {
     public static void main (String[] args) {
-        MyStack<Person> stk = new MyStack<>();
-        stk.addAll(
-                new Person(1 , "Hussein Sarea") ,
-                new Person(2 , "Moataz Sarea") ,
-                new Person(3, "Ekram Sarea")
-        );
-
-        stk.pop();
-
-        var it = stk.iterator(); // Iterator<Person>
-        it.forEachRemaining(person -> {
-            System.out.println(person.getId());
-            System.out.println(person.getName());
-        });
-
+        MyStack<Integer> stk = new MyStack<>();
+        stk.addAll(1 , 2 ,3);
+        for (int num : stk){
+            System.out.println(num);
+        }
     }
 }
+/**
+ * A class which implements a stack using a linked list
+ *
+ * <p>Contains all the stack methods : push, pop, printStack, isEmpty
+ */
 class MyStack<T> implements Iterable<T> {
-    /**
-     * Returns an iterator over elements of type {@code T}.
-     *
-     * @return an Iterator.
-     */
-    @Override
-    public Iterator<T> iterator () {
-        return new StackIterator<>(this.head);
-    }
     private class ListNode<T>{
         private T val;
         private ListNode<T> next;
@@ -60,35 +31,77 @@ class MyStack<T> implements Iterable<T> {
     }
     private ListNode<T> head;
 
+    /**
+     * init variable.
+     */
     public MyStack(){
         this.head = null;
     }
 
+    /**
+     * Add element at top
+     *
+     * @param val to be added
+     * @return void.
+     */
     public void add(T val){
         this.head = new MyStack<T>.ListNode<>(val ,this.head);
     }
+
+    /**
+     * Pop element at top of stack
+     *
+     * @return void
+     * @throws NoSuchElementException if stack is empty
+     */
     public void pop(){
         if (this.empty()){
             throw new NoSuchElementException("Stack is empty.");
         }
         ListNode<T> oldHead = this.head;
         this.head = this.head.next;
-        oldHead = null;
+        oldHead = null; // clear to let GC do it's work.
     }
+
+    /**
+     * Add elements at top
+     * @param values
+     */
     public void addAll(T... values){
         for (T value : values){
             this.add(value);
         }
     }
+
+    /**
+     * get element at the top of the stack
+     * @return top of stack.
+     */
     public T top() {
         if (this.empty()){
             throw new NoSuchElementException("Your stack is empty.");
         }
         return this.head.val;
     }
+
+    /**
+     * check if stack is empty.
+     * @return true if stack is empty otherwise false.
+     */
     public boolean empty(){
         return this.head == null;
     }
+
+    /**
+     * Returns an iterator over elements of type {@code T}.
+     *
+     * @return an Iterator.
+     */
+    @Override
+    public Iterator<T> iterator () {
+        return new StackIterator<>(this.head);
+    }
+
     class StackIterator<T> implements Iterator<T>{
         private ListNode<T> current;
 
