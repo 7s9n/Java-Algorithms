@@ -12,6 +12,7 @@ public class StackOfLinkedList {
         for (int num : stk){
             System.out.println(num);
         }
+        System.out.println(stk);
     }
 }
 /**
@@ -91,6 +92,16 @@ class MyStack<T> implements Iterable<T> {
      */
     public boolean empty(){
         return this.head == null;
+    }
+    @Override
+    public String toString() {
+        ListNode<T> cur = head;
+        StringBuilder builder = new StringBuilder();
+        while (cur != null) {
+            builder.append(cur.val).append("->");
+            cur = cur.next;
+        }
+        return builder.replace(builder.length() - 2, builder.length(), "").toString();
     }
 
     /**
