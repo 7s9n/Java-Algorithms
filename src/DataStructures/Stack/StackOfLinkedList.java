@@ -76,6 +76,7 @@ class MyStack<T> implements Iterable<T> {
     /**
      * get element at the top of the stack
      * @return top of stack.
+     * @throws NoSuchElementException if stack is empty.
      */
     public T top() {
         if (this.empty()){
