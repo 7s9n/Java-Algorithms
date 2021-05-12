@@ -15,7 +15,7 @@ public class DecimalToHexaDecimal {
         for (int i = numOfDigit - 1; i >= 0; --i) {
             int idx = dec & 0b1111 ;
             result.setCharAt(i , alpha.charAt(idx));
-            dec >>= 0b100; // 0x100 -> 4
+            dec >>= 0b100; //-> 4
         }
         return result.toString();
     }

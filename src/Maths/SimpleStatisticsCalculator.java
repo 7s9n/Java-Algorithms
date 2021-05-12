@@ -13,9 +13,10 @@ import java.util.List;
 public class SimpleStatisticsCalculator {
 
     public static void main (String[] args) {
-        Table dataSet = new Table(10, 50,4);
+        Table dataSet = new Table(20, 100,8);
         System.out.println("Mean: " + dataSet.getMean());
         System.out.println("Median: " + dataSet.getMedian());
+        System.out.println("Median using Empirical Formula: " + dataSet.getMedianEmpiricalFormula());
         System.out.println("Mode: " + dataSet.getMode());
         System.out.println("Variance: " + dataSet.getVariance());
         System.out.println("Standard deviation: " + dataSet.getStandardDeviation());
@@ -131,6 +132,9 @@ class Table{
             }
         }
         return 0.0;
+    }
+    public double getMedianEmpiricalFormula(){
+        return ( getMode() + (2 * getMean()) ) / 3.0;
     }
     public double getMean(){
         return totalFrequencyMulByMid / this.totalFrequency;
