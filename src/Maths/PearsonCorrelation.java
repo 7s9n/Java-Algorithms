@@ -21,17 +21,17 @@ public class PearsonCorrelation {
         if (len != y.length || len < 0){
             throw new RuntimeException("Error! Please ensure you have the same number of scores for both your X and Y variable.");
         }
-        double sumX , sumY , sumXY , squareSumX , squareSumY ;
-        sumX = sumY = sumXY = squareSumX = squareSumY = 0.0;
+        double sigmaX , sigmaY , sigmaXY , sigmaXS , sigmaYS ;
+        sigmaX = sigmaY = sigmaXY = sigmaXS = sigmaYS = 0.0;
         for (int i = 0; i < len; ++i){
-            sumX += x[i]; // sum of elements of array x.
-            sumY += y[i]; // sum of elements of array y.
-            sumXY += ( x[i] * y[i] );
-            squareSumX += ( x[i] * x[i]);
-            squareSumY += ( y[i] * y[i]);
+            sigmaX += x[i]; // sum of elements of array x.
+            sigmaY += y[i]; // sum of elements of array y.
+            sigmaXY += ( x[i] * y[i] );
+            sigmaXS += ( x[i] * x[i]);
+            sigmaYS += ( y[i] * y[i]);
         }
-        return (len * sumXY - sumX * sumY) /
-                Math.sqrt( (len * squareSumX - sumX * sumX) * (len * squareSumY - sumY * sumY) );
+        return (len * sigmaXY - sigmaX * sigmaY) /
+                Math.sqrt( (len * sigmaXS - sigmaX * sigmaX) * (len * sigmaYS - sigmaY * sigmaY) );
     }
     /**
      * This method computes Pearson's correlation coefficients ,

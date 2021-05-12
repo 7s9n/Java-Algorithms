@@ -1,5 +1,8 @@
 package DataStructures.Lists;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
@@ -122,7 +125,7 @@ public class SinglyLinkedList<T> implements Iterable<T>{
         }
         return tmp.val;
     }
-    public static void main (String[] args) {
+    public static void main (String[] args) throws IOException {
         SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
         list.addAtHead(1);
         list.addLast(2);
