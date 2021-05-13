@@ -1,5 +1,9 @@
 package Conversions;
 
+/**
+ * for more information look at wikipedia.
+ * https://simple.wikipedia.org/wiki/Hexadecimal#:~:text=To%20convert%20a%20number%20from,14%2C%20and%20F%20%3D%2015.
+ */
 public class HexDecimalToDecimal {
     public static void main (String[] args) {
         System.out.println(hexDecimalToDecimal("f"));
