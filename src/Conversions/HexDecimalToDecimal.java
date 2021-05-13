@@ -1,21 +1,19 @@
 package Conversions;
 
-import java.util.Locale;
-
 public class HexDecimalToDecimal {
     public static void main (String[] args) {
-        System.out.println(hexDecimalToDecimal("abcdef"));
+        System.out.println(hexDecimalToDecimal("f"));
     }
     public static int hexDecimalToDecimal(String hex){
         hex = hex.toUpperCase();
-        int dec = 0 , cnt = 0;
-        for (int i = hex.length() -1; i >= 0 ; --i) {
-            char c = hex.charAt(i);
-            int num = (Character.isDigit(c) ? c - '0' : c - 'A' + 10);
-            if (num < 0 || num >= 16){
-                throw new NumberFormatException("Error , enter valid hex decimal");
+        int dec = 0 , size = hex.length();
+        String table = "0123456789ABCDEF";
+        for (int i = 0; i < size; i++) {
+            int digit = table.indexOf(hex.charAt(i));
+            if (digit == -1){
+                throw new NumberFormatException("Enter a valid hex value");
             }
-            dec += num * Math.pow(16,cnt++);
+            dec = dec * 16 + digit;
         }
         return dec;
     }
