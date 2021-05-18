@@ -33,13 +33,6 @@ public class FindModeInBinarySearchTree {
 
     private static TreeNode root; // Object of type TreeNode.
 
-    public static void main (String[] args) {
-        root = new TreeNode(1,null , new TreeNode(2,new TreeNode(2),null));
-        int[] modes = findMode(root);
-        for (var mode : modes){
-            System.out.print(mode + " ");
-        }
-    }
     private static void solve(TreeNode root, Map<Integer,Integer> freq){
         if ( root == null)
             return;
@@ -59,5 +52,12 @@ public class FindModeInBinarySearchTree {
                 result.add(key);
         }
         return result.stream().mapToInt(n -> n).toArray();
+    }
+    public static void main (String[] args) {
+        root = new TreeNode(1,null , new TreeNode(2,new TreeNode(2),null));
+        int[] modes = findMode(root);
+        for (var mode : modes){
+            System.out.print(mode + " ");
+        }
     }
 }
