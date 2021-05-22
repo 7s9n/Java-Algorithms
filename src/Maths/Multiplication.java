@@ -9,6 +9,12 @@ public class Multiplication {
         }
         return (b < 0) ? -result : result;
     }
+    public static long multiplyUsingLogs(int a , int b){
+        int absA = Math.abs(a);
+        int absB = Math.abs(b);
+        long result = Math.round(Math.pow(10 , Math.log10(absA) + Math.log10(absB)));
+        return (a > 0 && b > 0 || a < 0 && b < 0) ? result : -result;
+    }
     public static void main (String[] args) {
         System.out.println(multiplyUsingLoop(9,6));
     }
