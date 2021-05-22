@@ -17,5 +17,8 @@ public class Multiplication {
     }
     public static void main (String[] args) {
         System.out.println(multiplyUsingLoop(9,6));
+        System.out.println(multiplyUsingLogs(9,6));
+        System.out.println(multiplyUsingLoop(9,99));
+        System.out.println(multiplyUsingLogs(9,99));
     }
 }
