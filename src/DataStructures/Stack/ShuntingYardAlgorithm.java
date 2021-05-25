@@ -12,7 +12,7 @@ public class ShuntingYardAlgorithm {
     public static void main (String[] args) {
         assert toPostfix("3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3").equals("342*15-23^^/+");
         assert toPostfix("( 1 - 5  ^ 2 ^ 3) " ).equals("1523^^-");
-        System.out.println(toPrefix("(A + B * C)"));
+        assert toPrefix("3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3").equals("+3/*42^-15^23");
     }
     /**
      * simple function that converts infix to postfix using Shunting Yard Algorithm.
