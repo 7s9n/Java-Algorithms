@@ -15,6 +15,6 @@ public class MidPoint {
         if (lowerBoundary > upperBoundary){
             throw new RuntimeException("Lower boundary is greater than the upper boundary");
         }
-        return (lowerBoundary + upperBoundary) / 2;
+        return (lowerBoundary + upperBoundary) / 2f;
     }
 }

@@ -15,7 +15,7 @@ public class StandardDeviation {
      * @return standard deviation of the given data set.
      */
     public static double getStandardDeviationP(int ... values){
-        double mean = Arrays.stream(values).sum() / values.length;
+        double mean = Arrays.stream(values).average().getAsDouble();
         double stdDev = 0.0;
         for (int value : values){
             stdDev += Math.pow((value - mean), 2) ;
@@ -33,7 +33,7 @@ public class StandardDeviation {
         if (values.length == 1 ){
             throw new ArithmeticException("Divide by zero");
         }
-        double mean = Arrays.stream(values).sum() / values.length;
+        double mean = Arrays.stream(values).average().getAsDouble();
         double stdDev = 0.0;
         for (int value : values){
             stdDev += Math.pow((value - mean), 2) ;

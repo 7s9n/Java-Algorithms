@@ -32,7 +32,7 @@ public class ReverseOnlyLetters {
      * so that popping the stack reverses the letters.
      * (Alternatively, we could have collected the letters into an array and reversed the array.)
      * Then, when writing the characters of S, any time we need a letter, we use the one we have prepared instead.
-     * @param s
+     * @param s string to be reversed.
      * @return reversed string.
      */
     public static String reverseOnlyLetters(String s){
@@ -59,7 +59,7 @@ public class ReverseOnlyLetters {
      * we want to write the next letter that occurs if we iterated through the string backwards.
      * So we do just that: keep track of a pointer j that iterates through the string backwards.
      * When we need to write a letter, we use it.
-     * @param s
+     * @param s string to be reversed.
      * @return reversed string.
      */
     public static String reverseOnlyLetters2(String s){

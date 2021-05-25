@@ -24,7 +24,7 @@ public class MinValue {
      * @return the smaller of {@code a} and {@code b}.
      */
     public static int min(int a , int b){
-        return a < b ? a : b;
+        return Math.min(a , b); //return a < b ? a : b;
     }
     /**
      * Returns the smaller of ... {@code int} values. That is, the result the argument closer to the
@@ -35,10 +35,10 @@ public class MinValue {
      * @return the smaller of {@code values} .
      */
     public static int min(int...  values){
-        int len = values.length;
         int minimum = Integer.MAX_VALUE;
-        for (int i = 0; i < len; i++) {
-            minimum  = values[i] < minimum ? values[i] : minimum;
+        for (int value : values) {
+            minimum = Math.min(value , minimum);
+            //minimum = value < minimum ? value : minimum;//minimum = value < minimum ? value : minimum; you can use this if you don't want to use built in function.
         }
         return minimum;
     }

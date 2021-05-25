@@ -32,7 +32,7 @@ public class Variance {
         if (values.length <= 1){
             throw new RuntimeException("Error: You may enter at least 2 values.");
         }
-        double mean = Arrays.stream(values).sum() / values.length;
+        double mean = Arrays.stream(values).average().getAsDouble();
         double variance = 0.0;
         for (int value : values){
             variance += Math.pow((value - mean), 2) ;

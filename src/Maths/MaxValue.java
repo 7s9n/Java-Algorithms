@@ -1,6 +1,5 @@
 package Maths;
 
-import java.util.Collection;
 import java.util.Random;
 
 public class MaxValue {
@@ -25,7 +24,7 @@ public class MaxValue {
      * @return the larger of {@code a} and {@code b}.
      */
     public static int max(int a , int b){
-        return a > b ? a : b;
+        return Math.max(a , b); // you can use -> return a > b ? a : b;
     }
     /**
      * Returns the greater of ... {@code int} values. That is, the result is the argument closer to
@@ -36,10 +35,10 @@ public class MaxValue {
      * @return the larger of {@code values}.
      */
     public static int max(int...  values){
-        int len = values.length;
         int maximum = Integer.MIN_VALUE;
-        for (int i = 0; i < len; i++) {
-            maximum  = values[i] > maximum ? values[i] : maximum;
+        for (int value : values) {
+            maximum = Math.max(value , maximum);
+            //maximum = value > maximum ? value : maximum; you can use this if you don't want to use built in function.
         }
         return maximum;
     }

@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class PearsonCorrelation {
     public static void main (String[] args) {
-        int x[] = new int[]{ 2 , 5 , 1 , 3 , 4 };
-        int y[] = new int[]{ 8 , 3 , 1 , 2 , 5 };
+        int[] x = new int[]{ 2 , 5 , 1 , 3 , 4 };
+        int[] y = new int[]{ 8 , 3 , 1 , 2 , 5 };
         System.out.println(getPearsonCorrelation(x  , y));
         System.out.println(getPearsonCorrelation2(x , y));
     }
@@ -18,7 +18,7 @@ public class PearsonCorrelation {
      */
     public static double getPearsonCorrelation(int[] x , int[] y){
         int len = x.length;
-        if (len != y.length || len < 0){
+        if (len != y.length || len <= 0){
             throw new RuntimeException("Error! Please ensure you have the same number of scores for both your X and Y variable.");
         }
         double sigmaX , sigmaY , sigmaXY , sigmaXS , sigmaYS ;
@@ -41,11 +41,11 @@ public class PearsonCorrelation {
      * @return the correlation coefficient between two data sets.
      */
     public static double getPearsonCorrelation2(int[] x , int[] y){
-        if (x.length != y.length || x.length < 0){
+        if (x.length != y.length || x.length <= 0){
             throw new RuntimeException("Error! Please ensure you have the same number of scores for both your X and Y variable.");
         }
         double meanX = Arrays.stream(x).average().getAsDouble();
-        double meanY = Arrays.stream(y).average().getAsDouble();;
+        double meanY = Arrays.stream(y).average().getAsDouble();
         double r = 0.0;
         double squareSumXMinusMeanX = 0.0;
         double squareSumYMinusMeanY = 0.0;
