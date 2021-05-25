@@ -2,11 +2,22 @@ package DataStructures.Stack;
 
 import java.util.Stack;
 
+/**
+ * the shunting-yard algorithm
+ * is a method for parsing mathematical expressions specified in infix notation.
+ * read more from Wikipedia  https://en.wikipedia.org/wiki/Shunting-yard_algorithm
+ */
 public class ShuntingYardAlgorithm {
     public static void main (String[] args) {
         assert toPostfix("3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3").equals("342*15-23^^/+");
-        assert toPostfix("3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3").equals("342*15-23^^/+");
+        assert toPostfix("( 1 - 5  ^ 2 ^ 3) " ).equals("1523^^-");
     }
+
+    /**
+     * simple function that converts infix to postfix using Shunting Yard Algorithm.
+     * @param expression infix expression
+     * @return postfix expression of the given infix.
+     */
     public static String toPostfix(String expression){
         if (expression.isEmpty() || expression.isBlank())
             throw new IllegalArgumentException("expression cannot be empty.");
