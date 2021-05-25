@@ -8,11 +8,11 @@ import java.util.Stack;
  * read more from Wikipedia  https://en.wikipedia.org/wiki/Shunting-yard_algorithm
  */
 public class ShuntingYardAlgorithm {
+
     public static void main (String[] args) {
         assert toPostfix("3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3").equals("342*15-23^^/+");
         assert toPostfix("( 1 - 5  ^ 2 ^ 3) " ).equals("1523^^-");
     }
-
     /**
      * simple function that converts infix to postfix using Shunting Yard Algorithm.
      * @param expression infix expression
