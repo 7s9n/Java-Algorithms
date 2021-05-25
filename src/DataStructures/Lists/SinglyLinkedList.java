@@ -1,8 +1,6 @@
 package DataStructures.Lists;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
