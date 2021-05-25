@@ -1,6 +1,5 @@
 package DataStructures.Stack;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
 
@@ -13,7 +12,7 @@ public class SortStack {
         System.out.println("Stack after sorting: " + stack);
     }
 
-    private static <T extends Comparable> Stack<T> sortStack (Stack<T> stack) {
+    private static <T extends Comparable<T> > Stack<T> sortStack (Stack<T> stack) {
         Stack<T> helper = new Stack<>();
         while (!stack.empty()){
             T x = stack.pop();
