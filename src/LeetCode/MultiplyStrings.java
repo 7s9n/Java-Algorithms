@@ -6,8 +6,6 @@ package LeetCode;
  *
  * Note: You must not use any built-in BigInteger library or convert the inputs to integer directly.
  *
- *
- *
  * Example 1:
  * Input: num1 = "2", num2 = "3"
  * Output: "6"

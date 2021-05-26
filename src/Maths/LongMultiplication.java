@@ -2,7 +2,7 @@ package Maths;
 
 public class LongMultiplication {
     public static void main (String[] args) {
-        System.out.println(multiply("123","456"));
+        System.out.println(multiply("500000","5000000000"));
     }
     public static String multiply(String a , String b){
         if (a.equals("0") || b.equals("0"))
