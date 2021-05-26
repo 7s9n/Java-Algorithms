@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class DecimalToAnyUsingStack {
     public static void main (String[] args) {
-        System.out.println(convert(10,2));
+        System.out.println(convert(5,5));
     }
     /**
      * Convert decimal number to another radix
