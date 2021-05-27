@@ -15,11 +15,11 @@ public class DecimalToBinary {
 
     /**
      * This method converts a decimal number to a binary number using a conventional algorithm.
-     * @param decimal
+     * @param decimal number
      * @return binary form of the decimal.
      */
     public static int decimalToBinary(int decimal){
-        int bit = 0, b = 0 , c = 0 ;
+        int bit , b = 0 , c = 0 ;
         while (decimal != 0){
             bit = decimal % 2 ;
             b = b + bit * (int) Math.pow(10 , c++);
@@ -30,7 +30,7 @@ public class DecimalToBinary {
 
     /***
      * This method converts a decimal number to a binary number using a bitwise algorithm.
-     * @param decimal
+     * @param decimal number
      * @return binary form of the decimal.
      */
     public static int decimalToBinaryBitWise(int decimal){
