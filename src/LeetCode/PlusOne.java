@@ -28,7 +28,7 @@ package LeetCode;
  */
 public class PlusOne {
     public static void main (String[] args) {
-        for (var num : plusOne(new int[]{1,9}))
+        for (var num : plusOne(new int[]{9,9}))
             System.out.print(num + " ");
     }
     public static int[] plusOne(int[] digits) {
@@ -43,6 +43,6 @@ public class PlusOne {
         } // end of while.
         int[] res = new  int[digits.length + 1];
         res[0] = 1;
-        return digits;
+        return res;
     }
 }
