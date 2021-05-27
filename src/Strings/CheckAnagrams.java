@@ -37,9 +37,8 @@ public class CheckAnagrams {
             return false;
 
         Map<Character , Integer> frequency = new HashMap<>();
-        int length = firstString.length();
 
-        for (int i = 0; i < length; i++) {
+        for (int i = 0 , length = firstString.length(); i < length; i++) {
             char firstStrChar = firstString.charAt(i);
             char secondStrChar = secondString.charAt(i);
             frequency.put(firstStrChar, frequency.getOrDefault(firstStrChar,0) + 1);
