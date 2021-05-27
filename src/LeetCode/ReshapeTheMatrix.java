@@ -9,8 +9,7 @@ package LeetCode;
  *
  * The reshaped matrix should be filled with all the elements of the original matrix in the same row-traversing
  * order as they were.
- * If the reshape operation with given parameters is possible and legal,
- * output the new reshaped matrix; Otherwise, output the original matrix.
+ * If the reshape operation with given parameters is possible and legal, output the new reshaped matrix; Otherwise, output the original matrix.
  */
 public class ReshapeTheMatrix {
     public static void main (String[] args) {
