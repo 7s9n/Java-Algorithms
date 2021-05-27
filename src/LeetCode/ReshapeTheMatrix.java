@@ -18,7 +18,7 @@ public class ReshapeTheMatrix {
                         {1,2,3},
                         {4,5,6}
                 };
-        mat = matrixReshape(mat,0,0);
+        mat = matrixReshape(mat,3,2);
         for (var array : mat){
             for (var num : array){
                 System.out.print(num + " ");
