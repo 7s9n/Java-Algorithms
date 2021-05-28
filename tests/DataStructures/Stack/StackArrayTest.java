@@ -56,7 +56,7 @@ class StackArrayTest {
         for (i = 1; i <= 1000; ++i)
             stack.push(i);
 
-        for (var num : stack){
+        for (int num : stack){
             Assertions.assertEquals(num , stack.peek());
             Assertions.assertEquals(--i , stack.pop());
         }
