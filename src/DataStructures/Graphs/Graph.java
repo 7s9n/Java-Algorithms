@@ -57,7 +57,7 @@ class AdjacencyListGraph<T extends Comparable<T>>{
         for (var vertex : vertices){
             if (from.compareTo(vertex.data) == 0) // see if from vertex already exists
                 fromV = vertex;
-            else if (to.compareTo(vertex.data) == 0)  // see if to vertex already exists
+            if (to.compareTo(vertex.data) == 0)  // see if to vertex already exists
                 toV = vertex;
             if (fromV != null && toV != null)break; // both nodes exist so stop searching
         }// end of for loop.
@@ -112,10 +112,11 @@ public class Graph {
         assert graph.addEdge(1,3);
         assert graph.addEdge(3,1);
         assert graph.addEdge(3,2);
-        assert graph.addEdge(3,0);
+        assert graph.addEdge(3,3);
         assert graph.addEdge(3,4);
         assert graph.addEdge(3,5);
         assert graph.addEdge(3,6);
+        assert graph.removeEdge(3,3);
         System.out.println(graph);
         //assert graph.addEdge(1,2);
     }
