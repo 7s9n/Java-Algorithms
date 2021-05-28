@@ -26,17 +26,22 @@ class StackArrayTest {
     }
     @Test
     public void testPush(){
-        int i = 1;
-        for (; i <= 5; i++){
+        for (int i = 1; i <= 100; i++){
             stack.push(i);
             Assertions.assertEquals(i,stack.size());
         }
     }
     @Test
     public void testPop(){
-        stack.push(5);
-        Assertions.assertEquals(5,stack.pop());
-        Assertions.assertEquals(0,stack.size());
+        int i = 1;
+        for (; i <= 100; ++i){
+            stack.push(i);
+        }
+        for (--i; i>= 1; --i){
+            Assertions.assertEquals(i,stack.size());
+            Assertions.assertEquals(i,stack.pop());
+            Assertions.assertEquals(i-1,stack.size());
+        }
     }
     @Test
     public void testPeek(){

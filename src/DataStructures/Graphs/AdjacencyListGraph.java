@@ -3,7 +3,7 @@ package DataStructures.Graphs;
 import java.util.LinkedList;
 import java.util.List;
 
-class AdjacencyListGraph<T extends Comparable<T>>{
+public class AdjacencyListGraph<T extends Comparable<T>>{
     private final List<Vertex> vertices;
     private class Vertex{
         private final T data;
@@ -101,23 +101,5 @@ class AdjacencyListGraph<T extends Comparable<T>>{
             str.append("\n");
         }
         return str.toString();
-    }
-}
-public class Graph {
-    public static void main (String[] args) {
-            AdjacencyListGraph<Integer> graph = new AdjacencyListGraph<>();
-        assert graph.addEdge(1,2);
-        assert !graph.addEdge(1,2);
-        assert !graph.removeEdge(2,1);
-        assert graph.addEdge(1,3);
-        assert graph.addEdge(3,1);
-        assert graph.addEdge(3,2);
-        assert graph.addEdge(3,3);
-        assert graph.addEdge(3,4);
-        assert graph.addEdge(3,5);
-        assert graph.addEdge(3,6);
-        assert graph.removeEdge(3,3);
-        System.out.println(graph);
-        //assert graph.addEdge(1,2);
     }
 }
