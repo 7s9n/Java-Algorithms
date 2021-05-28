@@ -39,8 +39,38 @@ public class TwoSum {
     public static void main (String[] args) {
         int [] nums = new int[]{1,2,3,4,5};
         var ans = twoSum(nums , 3);
+        var ans2 = twoSum2(nums , 3);
         System.out.println(ans[0] + " : " + ans[1]);
+        System.out.println(ans2[0] + " : " + ans2[1]);
     }
+    /**
+     * Approach 1: Brute Force
+     * The brute force approach is simple.
+     * Loop through each element x and find if there is another value that equals to target - x .
+     * @param nums array of ints
+     * @param target number
+     * @return indices of the two numbers such that they add up to target.
+     */
+    public static int[] twoSum2(int[] nums, int target) {
+        int len = nums.length;
+        for (int i = 0; i < len; ++i){
+            for (int j = i + 1; j < len; j++) {
+                if (nums[j] == target - nums[i])
+                    return new int[]{i , j};
+            }
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
+    /**
+     * Approach 2: One-pass Hash Table
+     * It turns out we can do it in one-pass.
+     * While we iterate and inserting elements into the table,
+     * we also look back to check if current element's complement already exists in the table.
+     * If it exists, we have found a solution and return immediately.
+     * @param nums array of ints
+     * @param target number
+     * @return indices of the two numbers such that they add up to target.
+     */
     public static int[] twoSum(int[] nums, int target) {
         Map<Integer , Integer> map = new HashMap<>();
         for (int i = 0 , len = nums.length; i < len; i++) {
