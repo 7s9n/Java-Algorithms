@@ -3,6 +3,15 @@ package DataStructures.Stack;
 import java.util.Arrays;
 import java.util.EmptyStackException;
 
+/**
+ * This class implements a Stack using a regular array.
+ *
+ * A stack is exactly what it sounds like. An element gets added to the top of the stack and only
+ * the element on the top may be removed. This is an example of an array implementation of a Stack.
+ * So an element can only be added/removed from the end of the array. In theory stack have no fixed
+ * size, but with an array implementation it does.
+ */
+
 class StackArray<T> implements Stack<T> {
     private Object[] container;
     private int size;
