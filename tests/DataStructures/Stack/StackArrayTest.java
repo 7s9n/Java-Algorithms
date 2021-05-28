@@ -34,7 +34,7 @@ class StackArrayTest {
     @Test
     public void testPop(){
         int i = 1;
-        for (; i <= 100; ++i){
+        for (; i <= 1000; ++i){
             stack.push(i);
         }
         for (--i; i>= 1; --i){
@@ -49,5 +49,16 @@ class StackArrayTest {
         stack.push(8);
         Assertions.assertEquals(8,stack.peek());
         Assertions.assertEquals(1,stack.size());
+    }
+    @Test
+    public void testIterator(){
+        int i;
+        for (i = 1; i <= 1000; ++i)
+            stack.push(i);
+
+        for (var num : stack){
+            Assertions.assertEquals(num , stack.peek());
+            Assertions.assertEquals(--i , stack.pop());
+        }
     }
 }

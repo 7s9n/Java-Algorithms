@@ -2,7 +2,7 @@ package DataStructures.Stack;
 
 import java.util.EmptyStackException;
 
-public interface Stack <T>{
+public interface Stack <T> extends Iterable<T>{
     // return the number of elements in the stack
     int size();
 
