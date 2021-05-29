@@ -8,8 +8,7 @@ public class SetBits {
         // ith bit of n is being cleared by this operation.
         return (1 << i -1) | n;
     }
-
     public static void main (String[] args) {
-        System.out.println(setIthBit(65,7));
+        System.out.println(setIthBit(1,7));
     }
 }
