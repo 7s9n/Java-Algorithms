@@ -18,6 +18,9 @@ public class Rotation {
         k %= s.length();
         return s.substring(k) + s.substring(0 , k);
     }
+    public static String rightRotate(String s , int k){
+        return leftRotate(s , s.length() - k);
+    }
     /**
      * Move {@code n} characters in front of given character array to the end of array
      * @param values given character array
@@ -46,6 +49,7 @@ public class Rotation {
     }
 
     public static void main (String[] args) {
+        System.out.println(rightRotate("abcdefg",1));
         System.out.println(leftRotate("abcdefg",1));
         System.out.println((leftRotateV2("abcdefg".toCharArray() , 1)));
     }
