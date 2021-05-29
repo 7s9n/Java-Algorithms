@@ -54,7 +54,7 @@ public class SinglyLinkedList<T> implements Iterable<T>{
             this.next = next;
         }
     }
-    private class SinglyListIterator<T> implements Iterator<T>{
+    private class SinglyListIterator implements Iterator<T>{
         private ListNode<T> current;
         public SinglyListIterator(ListNode<T> ptr){
             this.current = ptr;

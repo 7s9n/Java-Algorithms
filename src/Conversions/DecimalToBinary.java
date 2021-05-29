@@ -6,8 +6,8 @@ package Conversions;
 public class DecimalToBinary {
 
     public static void main (String[] args) {
-        // test 200 times
-        for (int i = 0; i < 200; i++) {
+        // test 900 times
+        for (int i = 0; i < 900; i++) {
             assert Integer.parseInt(Integer.toBinaryString(i)) == decimalToBinary(i);
             assert Integer.parseInt(Integer.toBinaryString(i)) == decimalToBinaryBitWise(i);
         }

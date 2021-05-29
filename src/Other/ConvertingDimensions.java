@@ -6,24 +6,7 @@ package Other;
  * M[i] => M[i/n][i%n] where n is the number of cols.
  */
 public class ConvertingDimensions {
-    public static void main (String[] args) {
-        int[][] matrix = new int[][]{
-                {1,2,3},
-                {4,5,6},
-                {7,8,9}
-        };
-        var array = convertTo1d(matrix);
-        var mat = convertTo2d(array , 3 ,3); // [1][9] , [9][1] , [3][3]
-        for (int num : array){
-            System.out.print(num + " ");
-        }
-        System.out.println();
-        for (int[] ints : mat) {
-            for (int anInt : ints)
-                System.out.print(anInt + " ");
-            System.out.println();
-        }
-    }
+
     public static int[] convertTo1d(int[][] mat){
         int r = mat.length , c = mat[0].length;
         int[] ans = new int[r * c];
@@ -41,5 +24,24 @@ public class ConvertingDimensions {
             mat[i / c][i % c] = nums[i];
         }
         return mat;
+    }
+
+    public static void main (String[] args) {
+        int[][] matrix = new int[][]{
+                {1,2,3},
+                {4,5,6},
+                {7,8,9}
+        };
+        var array = convertTo1d(matrix);
+        var mat = convertTo2d(array , 3 ,3); // [1][9] , [9][1] , [3][3]
+        for (int num : array){
+            System.out.print(num + " ");
+        }
+        System.out.println();
+        for (int[] ints : mat) {
+            for (int anInt : ints)
+                System.out.print(anInt + " ");
+            System.out.println();
+        }
     }
 }
