@@ -2,8 +2,8 @@ package Conversions;
 
 public class DecimalToAnyBase {
     public static void main (String[] args) {
-        System.out.println(convertToAnyBase(7006362,36));
-        System.out.println(Integer.valueOf("46656",36));
+        System.out.println(convertToAnyBase(7006362,2));
+        System.out.println(Integer.valueOf("11010101110100010011010",2));
     }
     /**
      *
