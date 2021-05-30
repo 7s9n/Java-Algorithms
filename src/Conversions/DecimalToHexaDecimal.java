@@ -6,7 +6,7 @@ public class DecimalToHexaDecimal {
     private final static String  alpha = "0123456789ABCDEF";
     public static void main (String[] args) {
         System.out.println(toHex(50546));
-        System.out.println(decimalToHex(444444444));
+        System.out.println(decimalToHex(-2));
     }
     public static String decimalToHex(int dec){
         StringBuilder result = new StringBuilder(numOfDigit); // capacity
@@ -14,7 +14,7 @@ public class DecimalToHexaDecimal {
         for (int i = numOfDigit - 1; i >= 0; --i) {
             int idx = dec & 0b1111 ;
             result.setCharAt(i , alpha.charAt(idx));
-            dec >>= 0b100; //-> 4
+            dec >>>= 0b100; //-> 4
         }
         return result.toString();
     }
