@@ -1,5 +1,6 @@
 package LeetCode;
 
+import java.lang.reflect.InvocationTargetException;
 /**
  * Given an integer num, return a string representing its hexadecimal representation.
  * For negative integers, two’s complement method is used.
@@ -22,8 +23,8 @@ package LeetCode;
  * -231 <= num <= 231 - 1
  */
 public class ConvertANumberToHexadecimal {
-    public static void main (String[] args) {
-        System.out.println(toHex(-1));
+    public static void main (String[] args) throws InvocationTargetException, IllegalAccessException {
+        System.out.println(toHex(999999999));
     }
     public static String toHex(int num) {
         String hexDigit = "0123456789abcdef";
