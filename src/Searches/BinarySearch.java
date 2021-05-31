@@ -24,7 +24,7 @@ public class BinarySearch implements SearchAlgorithm{
         if (left > right) return -1; // this means that the key not found
         int mid = left + (right - left) / 2;
         int comp = key.compareTo(array[mid]); // 0 if the key is equal to the array[mid].
-        if (comp == 0)
+        if (comp == 0) // key found
             return mid;
         else if (comp < 0) // if key < array[mid]
             return search(array , key , left , mid -1);
