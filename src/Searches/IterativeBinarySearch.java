@@ -2,9 +2,9 @@ package Searches;
 
 public class IterativeBinarySearch implements SearchAlgorithm{
     /**
-     * @param array is an array where the element should be found
-     * @param key   is an element which should be found
-     * @return first found index of the element
+     * @param array is an array where the element should be found.
+     * @param key   is an element which should be found.
+     * @return first found index of the element.
      */
     @Override
     public <T extends Comparable<T>> int find (T[] array, T key) {
