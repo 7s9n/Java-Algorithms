@@ -1,6 +1,5 @@
 package Utils;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -8,7 +7,7 @@ import java.util.stream.IntStream;
 public class TestUtils {
     private static final Random random = new Random();
     // Generates an array of random values where every number is between
-    // [min, max) and there are possible repeats.
+    // [min, max] and there are possible repeats.
     public static int[] randomIntegerArray(int size, int min, int max) {
         int[] array = new int[size];
         for (int i = 0; i < size; i++) array[i] = getRandomInt(min, max);
