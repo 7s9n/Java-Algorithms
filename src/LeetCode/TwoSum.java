@@ -38,8 +38,8 @@ import java.util.Map;
 public class TwoSum {
     public static void main (String[] args) {
         int [] nums = new int[]{1,2,3,4,5};
-        var ans = twoSum(nums , 3);
-        var ans2 = twoSum2(nums , 3);
+        var ans = twoSum(nums , 9);
+        var ans2 = twoSum2(nums , 9);
         System.out.println(ans[0] + " : " + ans[1]);
         System.out.println(ans2[0] + " : " + ans2[1]);
     }
@@ -54,8 +54,9 @@ public class TwoSum {
     public static int[] twoSum2(int[] nums, int target) {
         int len = nums.length;
         for (int i = 0; i < len; ++i){
+            int complement = target - nums[i];
             for (int j = i + 1; j < len; j++) {
-                if (nums[j] == target - nums[i])
+                if (nums[j] == complement)
                     return new int[]{i , j};
             }
         }

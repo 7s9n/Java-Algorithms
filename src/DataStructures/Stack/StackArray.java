@@ -1,5 +1,6 @@
 package DataStructures.Stack;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.EmptyStackException;
 import java.util.Iterator;
@@ -16,10 +17,10 @@ import java.util.function.Consumer;
  */
 
 class StackArray<T> implements Stack<T> {
-    private Object[] container;
+    private T[] container;
     private int size;
     private int capacity;
-    private class StackArrayIterator<T> implements Iterator<T>{
+    private class StackArrayIterator implements Iterator<T>{
         int ptr = size;
         /**
          * Returns {@code true} if the iteration has more elements.
@@ -39,10 +40,9 @@ class StackArray<T> implements Stack<T> {
          * @return the next element in the iteration
          * @throws NoSuchElementException if the iteration has no more elements
          */
-        @SuppressWarnings("unchecked")
         @Override
         public T next () {
-            return (T)container[--ptr];
+            return container[--ptr];
         }
 
         /**
@@ -104,10 +104,12 @@ class StackArray<T> implements Stack<T> {
     public StackArray(){
         this(10);
     }
+    @SuppressWarnings("unchecked")
     public StackArray(int capacity){
         this.size = 0;
         this.capacity = capacity;
-        this.container =  new Object[capacity];
+        // we use Java Reflection since Java doesn't allow us to instantiate a generic array
+        this.container = (T[])Array.newInstance(Object[].class.getComponentType(),capacity);
     }
     @Override
     public int size () {
@@ -126,22 +128,20 @@ class StackArray<T> implements Stack<T> {
         }
         container[size++] = val;
     }
-    @SuppressWarnings("unchecked")
     @Override
     public T pop (){
         if (isEmpty()){
             throw new EmptyStackException();
         }
-        T val = (T)container[--size];
+        T val = container[--size];
         container[size] = null;
         return val;
     }
-    @SuppressWarnings("unchecked")
     @Override
     public T peek () {
         if (isEmpty())
             throw new EmptyStackException();
-        return (T)container[size - 1];
+        return container[size - 1];
     }
     private void increaseCapacity() {
         capacity *= 2;
@@ -155,7 +155,7 @@ class StackArray<T> implements Stack<T> {
      */
     @Override
     public Iterator<T> iterator () {
-        return new StackArrayIterator<T>();
+        return new StackArrayIterator();
     }
 
 }

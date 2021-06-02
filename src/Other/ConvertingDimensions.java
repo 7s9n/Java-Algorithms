@@ -1,5 +1,7 @@
 package Other;
 
+import java.lang.reflect.Array;
+
 /**
  * M[i][j]=M[n*i+j] , where n is the number of cols.
  * This is the one way of converting 2-d indices into one 1-d index.

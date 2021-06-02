@@ -30,7 +30,8 @@ public class Mode {
         if (values.length == 0)return null;
         Map<Integer , Integer> freq = new HashMap<>();
         for(int value : values){
-            freq.put(value , freq.getOrDefault(value , 0) + 1);
+            //freq.put(value , freq.getOrDefault(value , 0) + 1);
+            freq.compute(value , (k , v)-> v == null ? 1 : v++);
         }
         int max_freq = Collections.max(freq.values());
         if (max_freq <= 1)

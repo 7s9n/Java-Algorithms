@@ -7,7 +7,8 @@ public class Variance {
         // test
         System.out.println(getVarianceP(2, 3 , 7 , 4 ));
         System.out.println(getVarianceS(2, 3 , 7 , 4 ));
-        System.out.println(getVarianceS(1)); // gives error.
+        System.out.println(getVarianceP(4,7,3,2));
+        //System.out.println(getVarianceS(1)); // gives error.
     }
     /**
      * This method calculates variance based on the entire population given as argument.
@@ -18,7 +19,7 @@ public class Variance {
         double mean = Arrays.stream(values).sum() / values.length;
         double variance = 0.0;
         for (int value : values){
-            variance += Math.pow((value - mean), 2) ;
+            variance += Math.pow((value - mean), 2);
         }
         variance /= values.length; //Divide the sum of the squares by n (for a population).
         return variance;

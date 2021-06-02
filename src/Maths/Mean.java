@@ -18,7 +18,7 @@ public class Mean {
         if (values.length < 1){
             throw new RuntimeException("Error: You may enter at least 1 value.");
         }
-        double sum = Arrays.stream(values).sum();
+        double sum = Arrays.stream(values).sum(); // or use Arrays.stream(values).average().getAsDouble();
         return sum / values.length;
     }
 }

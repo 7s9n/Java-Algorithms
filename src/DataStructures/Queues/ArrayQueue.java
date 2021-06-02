@@ -1,38 +1,28 @@
 package DataStructures.Queues;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
 
 public class ArrayQueue<T> implements Queue<T>{
-    private static final int DEFAULT_CAPACITY = 10;
     private int front; // elements are removed or peeked from the front.
     private int rear; // elements are added in the rear.
-    private int count; // elements are added in the rear.
-    private int capacity; // capacity of the queue (this is doubled when is exceeded).
-    private T[] queue; // the array that sits behind the queue.
+    private final int capacity; // capacity of the queue.
+    private final T[] queue; // the array that sits behind the queue.
 
     @SuppressWarnings("unchecked")
-    public ArrayQueue(){
+    public ArrayQueue(int capacity){
         // we use Java Reflection since Java doesn't allow us to instantiate a generic array
-        queue = (T[]) Array.newInstance(Object[].class.getComponentType(),DEFAULT_CAPACITY);
-        count = 0; // initially, the size of the queue is 0.
-        front = 0; // the index of the first element is 0.
-        rear =-1; // initially, there is no element in the queue.
-        capacity = DEFAULT_CAPACITY; // initially, the capacity is of 10 elements
+        this.queue = (T[]) Array.newInstance(Object[].class.getComponentType(),capacity);
+        this.front = 0; // initially , the index of the first element is 0.
+        this.rear = -1; // initially, there is no element in the queue.
+        this.capacity = capacity; // capacity of the queue.
     }
 
     @Override
     public void enqueue (T value) {
         if (isFull())
-            increaseCapacity();
-
-        rear = (rear + 1) % capacity;
-
-        System.out.println("Rear: " + rear);
-
-        queue[rear] = value;
-
-        ++count;
+            throw new RuntimeException("Queue is full.");
+        else
+            queue[++rear] = value;
     }
     // remove and return the front element from the queue.
     @Override
@@ -46,10 +36,12 @@ public class ArrayQueue<T> implements Queue<T>{
         queue[front] = null;
 
         // set the new front
-        front = (front + 1) % capacity;
-
-        // decrease the size of the queue
-        --count;
+        if (front == rear){
+            front = 0;
+            rear = -1;
+        }
+        else
+            ++front;
 
         return value;
     }
@@ -61,10 +53,10 @@ public class ArrayQueue<T> implements Queue<T>{
 
         return queue[front];
     }
-
+    // elements are added in the rear.
     @Override
     public int size () {
-        return this.count;
+        return (rear - front) + 1;
     }
     // check if the queue is empty or not.
     @Override
@@ -73,11 +65,18 @@ public class ArrayQueue<T> implements Queue<T>{
     }
     // check if the queue is full or not
     public boolean isFull(){
-        return size() == capacity;
+        return (rear == capacity - 1);
     }
-    private void  increaseCapacity(){
-        int newCapacity = queue.length * 2;
-        queue = Arrays.copyOf(queue , newCapacity);
-        capacity = newCapacity; // setting the new capacity
+    @Override
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        str.append("[");
+        for (int i = front; i <= rear; i++) {
+            str.append(queue[i]);
+            if (i < rear)
+                str.append(" ,");
+        }
+        str.append("]");
+        return str.toString();
     }
 }

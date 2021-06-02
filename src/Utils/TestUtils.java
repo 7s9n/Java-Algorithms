@@ -16,7 +16,7 @@ public class TestUtils {
     // Generates an array of random values where every number is between
     // [min, max] and there are possible repeats.
     public static Integer[] randomIntegerSortedArray(int size, int min, int max) {
-        IntStream integers = IntStream.of(randomIntegerArray(size , 1 , 1000));
+        IntStream integers = IntStream.of(randomIntegerArray(size , min , max));
         return integers.sorted().boxed().toArray(Integer[]::new);
     }
     //generate random number between [lowerBound - upperBound] inclusive.
