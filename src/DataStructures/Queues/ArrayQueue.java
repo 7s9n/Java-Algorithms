@@ -2,6 +2,13 @@ package DataStructures.Queues;
 
 import java.lang.reflect.Array;
 
+/**
+ * A simple queue is the most basic queue.
+ * In this queue, the enqueue operation takes place at the rear,
+ * while the dequeue operation takes place at the front:
+ * Its applications are process scheduling, disk scheduling, memory management, IO buffer, pipes, call center phone systems, and interrupt handling.
+ * @param <T> type of element that will be stored in the Array queue.
+ */
 public class ArrayQueue<T> implements Queue<T>{
     private int front; // elements are removed or peeked from the front.
     private int rear; // elements are added in the rear.
@@ -16,7 +23,11 @@ public class ArrayQueue<T> implements Queue<T>{
         this.rear = -1; // initially, there is no element in the queue.
         this.capacity = capacity; // capacity of the queue.
     }
-
+    /**
+     * Inserts an element at the rear of the queue
+     *
+     * @param value element to be added.
+     */
     @Override
     public void enqueue (T value) {
         if (isFull())
@@ -24,7 +35,10 @@ public class ArrayQueue<T> implements Queue<T>{
         else
             queue[++rear] = value;
     }
-    // remove and return the front element from the queue.
+    /**
+     * Remove an element from the front of the queue
+     * @return the element that has been removed from the front
+     */
     @Override
     public T dequeue () {
         // if the queue is empty we just throw a meaningful exception
@@ -45,7 +59,10 @@ public class ArrayQueue<T> implements Queue<T>{
 
         return value;
     }
-    // return but not remove the front element in the queue.
+    /**
+     * Checks what's at the front of the queue
+     * @return element at the front of the queue without removing it
+     */
     @Override
     public T peek () {
         if (isEmpty())
@@ -53,17 +70,26 @@ public class ArrayQueue<T> implements Queue<T>{
 
         return queue[front];
     }
-    // elements are added in the rear.
+    /**
+     * Returns the number of elements in the queue
+     * @return number of elements in the queue
+     */
     @Override
     public int size () {
         return (rear - front) + 1;
     }
-    // check if the queue is empty or not.
+    /**
+     * Returns true if the queue is empty
+     * @return true if the queue is empty
+     */
     @Override
     public boolean isEmpty () {
         return size() == 0;
     }
-    // check if the queue is full or not
+    /**
+     * Returns true if the queue is full
+     * @return true if the queue is full otherwise false
+     */
     public boolean isFull(){
         return (rear == capacity - 1);
     }
