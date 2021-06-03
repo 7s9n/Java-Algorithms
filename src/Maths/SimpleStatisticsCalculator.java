@@ -13,7 +13,7 @@ import java.util.List;
 public class SimpleStatisticsCalculator {
 
     public static void main (String[] args) {
-        Table dataSet = new Table(20, 100,8);
+        Table dataSet = new Table(10, 70,6);
         System.out.println("Mean: " + dataSet.getMean());
         System.out.println("Median: " + dataSet.getMedian());
         System.out.println("Median using Empirical Formula: " + dataSet.getMedianEmpiricalFormula());

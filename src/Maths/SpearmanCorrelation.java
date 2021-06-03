@@ -1,12 +1,11 @@
 package Maths;
 
-
 public class SpearmanCorrelation {
     public static void main (String[] args) {
         int[] x = new int[]{2,4,2,3};
         int[] y = new int[]{3,5,1,4};
-        int[] x2 = new int[]{3,44,62,80,88,74,99};
-        int[] y2 = new int[]{4,30,90,77,89,61,89};
+        int[] x2 = new int[]{1 , 2 , 3 , 4 , 5 , 6 , 7};
+        int[] y2 = new int[]{10 , 8 ,9 , 7 , 5 , 4 , 2};
         System.out.println(getSpearmanCorrelation(x , y));
         System.out.println(getSpearmanCorrelation(x2,y2));
     }
