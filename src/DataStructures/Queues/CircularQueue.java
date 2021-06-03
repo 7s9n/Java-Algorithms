@@ -65,4 +65,18 @@ public class CircularQueue<T> implements Queue<T>{
     public boolean isFull(){
         return (rear + 1) % capacity == front;
     }
+
+    @Override
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        str.append("[");
+        for (int i = front; ;  i = ++i % capacity) {
+            str.append(queue[i]).append(", ");
+            if (i == rear)
+                break;
+        }
+        str.delete(str.length() -2 , str.length());
+        str.append("]");
+        return str.toString();
+    }
 }

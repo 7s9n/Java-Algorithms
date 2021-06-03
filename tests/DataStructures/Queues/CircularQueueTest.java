@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class CircularQueueTest {
     private CircularQueue<Integer> queue;
-    private final int capacity = 100000;
+    private final int capacity = 10;
     @BeforeEach
     void setUp(){
         queue = new CircularQueue<>(capacity);
@@ -22,6 +22,7 @@ class CircularQueueTest {
 
     @Test
     void dequeue () {
+        System.out.println(queue);
         Assertions.assertEquals(1 , queue.dequeue());
         Assertions.assertFalse(queue.isEmpty());
         queue.enqueue(1);
