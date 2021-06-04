@@ -107,4 +107,6 @@ public interface LinkedList<T> extends Iterable<T>{
      * @return {@code true} if this list contains the specified element {o}.
      */
     boolean contains(Object o);
+
+    void clear();
 }

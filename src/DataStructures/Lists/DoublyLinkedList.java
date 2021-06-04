@@ -76,21 +76,21 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
      * Add an element at a specified index
      *
      * @param idx   index that element will be added at
-     * @param value the element to add
+     * @param data the element to add
      * @return true if the element was added successfully .
      */
     @Override
-    public boolean addAt (int idx, T value) {
+    public boolean addAt (int idx, T data) {
         if (!isValidPositionIndex(idx))
             throw new IndexOutOfBoundsException(indexErrorMessage(idx));
         if (idx == 0)
-            addFirst(value);
+            addFirst(data);
         else if (idx == size)
-            addLast(value);
+            addLast(data);
         else {
-
+            linkBefore(data , getNode(idx));
         }
-        return false;
+        return true;
     }
 
     /**
@@ -123,15 +123,7 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
     public T getAt (int index) {
         if (!isValidElementIndex(index))
             throw new IndexOutOfBoundsException(indexErrorMessage(index));
-        ListNode<T> cur = index < (size / 2) ? head : tail;
-
-        if (cur == head)
-            for (int i = 0; i < index ; ++i)
-                cur = cur.next;
-        else
-            for (int i = size -1 ; i > index ; --i)
-                cur = cur.prev;
-        return cur.data;
+        return getNode(index).data;
     }
 
     @Override
@@ -157,16 +149,8 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
             return unlinkHead(head);
         else if (index == size)
             return unlinkTail(tail);
-        else{
-            ListNode<T> cur = index < (size / 2) ? head : tail;
-            if (cur == head)
-                for (int i = 0; i < index ; ++i)
-                    cur = cur.next;
-            else
-                for (int i = size -1 ; i > index ; --i)
-                    cur = cur.prev;
-            return unlinkMiddle(cur);
-        }
+        else
+            return unlinkMiddle(getNode(index));
     }
 
 
@@ -184,6 +168,21 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
     @Override
     public boolean contains (Object o) {
         return false;
+    }
+
+    @Override
+    public void clear () {
+        // Clearing all of the links between nodes is "unnecessary", but:
+        // - helps a generational GC if the discarded nodes inhabi
+        for (ListNode<T> i = head; i != null;) {
+            ListNode<T> next = i.next;
+            i.data = null;
+            i.next = null;
+            i.prev = null;
+            i = next;
+        }
+        head = tail = null;
+        size = 0;
     }
 
     private void incrementSize(){
@@ -242,6 +241,23 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
         incrementSize();
     }
     /**
+     * inserts element data before non-null Node node.
+     */
+    private void linkBefore(T data , ListNode<T> node){
+        ListNode<T> prev = node.prev;
+        ListNode<T> newNode = new ListNode<>(prev , data , node);
+        prev.next = newNode;
+        node.prev = newNode;
+        incrementSize();
+    }
+    private void linkAfter(T data , ListNode<T> node){
+        ListNode<T> next = node.next;
+        ListNode<T> newNode = new ListNode<>(node , data , next);
+        next.prev = newNode;
+        node.next = newNode;
+        incrementSize();
+    }
+    /**
      * Unlinks non-null first node f.
      */
     private T unlinkHead(ListNode<T> f){
@@ -280,13 +296,32 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
         T data = m.data;
         ListNode<T> next = m.next;
         ListNode<T> prev = m.prev;
-        m.data = null;
-        prev.next = next;
-        next.prev = prev;
 
-        m.next = m.prev = null;
+        prev.next = next;
+        if (next != null)
+            next.prev = null;
+        // Memory clean up.
+        m.data = null;
+        m.next = m.prev = null; // help GC
         decrementSize();
         return data;
+    }
+
+    /**
+     * Returns the (non-null) Node at the specified element index.
+     */
+    private ListNode<T> getNode(int index){
+        ListNode<T> cur = index < (size / 2) ? head : tail;
+
+        if (cur == head){
+            for (int i = 0; i < index; ++i)
+                cur = cur.next;
+        }else{
+            for (int j = size - 1; j > index; --j) {
+                cur = cur.prev;
+            }
+        }
+        return cur;
     }
     private class ListItr implements Iterator<T>{
         private ListNode<T> cur;
@@ -330,14 +365,24 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
     public Iterator<T> iterator () {
         return new ListItr();
     }
+    @Override
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        str.append("[");
+        for (T val : this)
+            str.append(val).append(", ");
+        str.delete(str.length() - 2 , str.length());
+        str.append("]");
+        return str.toString();
+    }
 
     public static void main (String[] args) {
         DoublyLinkedList<Integer> integers = new DoublyLinkedList<>();
-        for (int i = 0; i < 1000; i++) {
-            integers.addLast(i + 1);
+        for (int i = 0; i < 10; i++) {
+            integers.addLast(i +1);
         }
-        integers.removeAt(1);
-        for (int i : integers)
-            System.out.println(i);
+        integers.addAt(10 , 0);
+        integers.addAt(11 , 5);
+        System.out.println(integers);
     }
 }
