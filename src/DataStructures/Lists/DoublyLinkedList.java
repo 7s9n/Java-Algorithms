@@ -141,7 +141,23 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
 
     @Override
     public T removeAt (int index) {
-        return null;
+        if (!isValidElementIndex(index))
+            throw new IndexOutOfBoundsException(indexErrorMessage(index));
+
+        if (index == 0)
+            return unlinkHead(head);
+        else if (index == size)
+            return unlinkTail(tail);
+        else{
+            ListNode<T> cur = index < (size / 2) ? head : tail;
+            if (cur == head)
+                for (int i = 0; i < index ; ++i)
+                    cur = cur.next;
+            else
+                for (int i = size -1 ; i > index ; --i)
+                    cur = cur.prev;
+            return unlinkMiddle(cur);
+        }
     }
 
 
@@ -245,6 +261,29 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
         decrementSize();
         return data;
     }
+    /**
+     * Unlinks non-null middle node m.
+     */
+    private T unlinkMiddle(ListNode<T> m){
+        T data = m.data;
+        ListNode<T> next = m.next;
+        ListNode<T> prev = m.prev;
+        m.data = null;
+        if (prev == null)
+            head = next;
+        else{
+            prev.next = next;
+            m.prev = null;
+        }
+        if (next == null)
+            tail = prev;
+        else{
+            next.prev = prev;
+            m.next = null;
+        }
+        decrementSize();
+        return data;
+    }
     private class ListItr implements Iterator<T>{
         private ListNode<T> cur;
         public ListItr(){
@@ -291,10 +330,12 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
     public static void main (String[] args) {
         DoublyLinkedList<Integer> integers = new DoublyLinkedList<>();
         for (int i = 0; i < 1000; i++) {
-            integers.addFirst(i +1);
+            integers.addLast(i + 1);
         }
+        System.out.println("Removed at: " + integers.removeAt(1));
         for (int i : integers)
             System.out.println(i);
-        System.out.println("Get at: " + integers.getAt(999));
+
+        System.out.println("Get at: " + integers.getAt(integers.size() - 1));
     }
 }
