@@ -30,13 +30,13 @@ public class CircularQueue<T> implements Queue<T>{
     }
     /**
      * Inserts an element at the rear of the queue
-     *
+     * Throws: IllegalStateException - if the element cannot be added at this time due to capacity restrictions
      * @param value element to be added.
      */
     @Override
     public void enqueue (T value) {
         if (isFull())
-            throw new RuntimeException("Queue is full");
+            throw new IllegalStateException("Queue is full");
         else if (isEmpty())
             front = rear = 0;
         else

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 class CircularQueueTest {
     private CircularQueue<Integer> queue;
     private final int capacity = 10;
@@ -48,7 +47,7 @@ class CircularQueueTest {
     @Test
     void isFull () {
         Assertions.assertTrue(queue.isFull());
-        Assertions.assertThrows(RuntimeException.class , ()-> queue.enqueue(1));
+        Assertions.assertThrows(IllegalStateException.class , ()-> queue.enqueue(1));
         queue.dequeue();
         Assertions.assertFalse(queue.isFull());
         queue.enqueue(1);

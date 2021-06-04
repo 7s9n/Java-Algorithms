@@ -25,7 +25,7 @@ public class ArrayQueue<T> implements Queue<T>{
     }
     /**
      * Inserts an element at the rear of the queue
-     *
+     * Throws: IllegalStateException - if the element cannot be added at this time due to capacity restrictions
      * @param value element to be added.
      */
     @Override

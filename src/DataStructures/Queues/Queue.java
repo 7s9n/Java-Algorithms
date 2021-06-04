@@ -2,8 +2,10 @@ package DataStructures.Queues;
 
 public interface Queue<T> {
     /**
-     * Inserts an element at the rear of the queue
+     * Inserts an element at the rear of the queue.
      *
+     * {@code Throws} IllegalStateException -
+     * if the element cannot be added at this time due to capacity restrictions
      * @param value element to be added.
      */
     void enqueue(T value);
