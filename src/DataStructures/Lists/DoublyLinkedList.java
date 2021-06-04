@@ -139,23 +139,12 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
         return unlinkTail(tail);
     }
 
-    /**
-     * Remove a node at a particular index
-     *
-     * @param index
-     * @return element at the specified index.
-     * @throws IllegalArgumentException if the index is not exist in the list or index is less than 0
-     */
     @Override
     public T removeAt (int index) {
         return null;
     }
 
-    /**
-     * Find the index of a particular value in the linked list
-     *
-     * @return index of a particular value or -1 if value doesn't exist in the list.
-     */
+
     @Override
     public int indexOf () {
         return 0;
