@@ -16,89 +16,57 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
         this.tail = null;
     }
 
-    /**
-     * Returns the number of elements in this list.  If this list contains
-     * more than {@code Integer.MAX_VALUE} elements, returns
-     * {@code Integer.MAX_VALUE}.
-     * @return the number of elements in this list
-     */
     @Override
     public int size () {
         return size;
     }
 
-    /**
-     * Returns {@code true} if this list contains no elements.
-     *
-     * @return {@code true} if this list contains no elements
-     */
     @Override
     public boolean isEmpty () {
         return size() == 0;
     }
 
-    /**
-     * Appends the specified element to the end of this list (optional operation).
-     *
-     * @param value element to be added
-     * @return true if the element was added successfully .
-     */
     @Override
     public boolean add (T value) {
         return addLast(value);
     }
 
-    /**
-     * Inserts the specified element at the beginning of this list.
-     *
-     * @param value the element to add
-     * @return true if the element was added successfully .
-     */
     @Override
     public boolean addFirst (T value) {
         linkHead(value);
         return true;
     }
-
-    /**
-     * Inserts the specified element at the end of this list.
-     *
-     * @param value the element to add
-     * @return true if the element was added successfully .
-     */
     @Override
     public boolean addLast (T value) {
         linkTail(value);
         return true;
     }
 
-    /**
-     * Add an element at a specified index
-     *
-     * @param idx   index that element will be added at
-     * @param data the element to add
-     * @return true if the element was added successfully .
-     */
     @Override
-    public boolean addAt (int idx, T data) {
-        if (!isValidPositionIndex(idx))
-            throw new IndexOutOfBoundsException(indexErrorMessage(idx));
+    public boolean addBefore (T data, T target) {
+        linkBefore(data , getNode(indexOf(target)));
+        return true;
+    }
+
+    @Override
+    public boolean addAfter (T data, T target) {
+        linkAfter(data , getNode(indexOf(target)));
+        return true;
+    }
+
+    @Override
+    public boolean add (int idx, T data) {
+        checkPositionIndex(idx);
         if (idx == 0)
-            addFirst(data);
+            linkHead(data);
         else if (idx == size)
-            addLast(data);
+            linkTail(data);
         else {
             linkBefore(data , getNode(idx));
         }
         return true;
     }
 
-    /**
-     * Return the value of the first node in the list.
-     *
-     * @return the first node if it exists, O(1)
-     * @throws NoSuchElementException if this list is empty
-     */
     @Override
     public T getFirst () {
         if (head == null)
@@ -106,12 +74,6 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
         return head.data;
     }
 
-    /**
-     * Return the value of the last node in the list.
-     *
-     * @return the last node if it exists, O(1)
-     * @throws NoSuchElementException if this list is empty
-     */
     @Override
     public T getLast () {
         if (tail == null)
@@ -121,8 +83,8 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
 
     @Override
     public T getAt (int index) {
-        if (!isValidElementIndex(index))
-            throw new IndexOutOfBoundsException(indexErrorMessage(index));
+        checkElementIndex(index);
+
         return getNode(index).data;
     }
 
@@ -142,8 +104,7 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
 
     @Override
     public T removeAt (int index) {
-        if (!isValidElementIndex(index))
-            throw new IndexOutOfBoundsException(indexErrorMessage(index));
+        checkElementIndex(index);
 
         if (index == 0)
             return unlinkHead(head);
@@ -155,19 +116,27 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
 
 
     @Override
-    public int indexOf () {
-        return 0;
+    public int indexOf (Object o) {
+        int index = 0;
+        if (o == null){
+            for (ListNode<T> i = head; i != null; i = i.next){
+                if (i.data == null)
+                    return index;
+                ++index;
+            }
+        }else{
+            for (ListNode<T> i = head; i != null; i = i.next){
+                if (o.equals(i.data))
+                    return index;
+                ++index;
+            }
+        }
+        return -1;
     }
 
-    /**
-     * Returns {@code true} if this list contains the specified element.
-     *
-     * @param o element whose presence in this list is to be tested
-     * @return {@code true} if this list contains the specified element {o}.
-     */
     @Override
     public boolean contains (Object o) {
-        return false;
+        return indexOf(o) != -1;
     }
 
     @Override
@@ -190,6 +159,14 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
     }
     private void decrementSize(){
         --size;
+    }
+    private void checkElementIndex(int index){
+        if (!isValidElementIndex(index))
+            throw new IndexOutOfBoundsException(indexErrorMessage(index));
+    }
+    private void checkPositionIndex(int index){
+        if (!isValidPositionIndex(index))
+            throw new IndexOutOfBoundsException(indexErrorMessage(index));
     }
     private boolean isValidElementIndex(int index){
         return index >= 0 && index < size;
@@ -246,15 +223,21 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
     private void linkBefore(T data , ListNode<T> node){
         ListNode<T> prev = node.prev;
         ListNode<T> newNode = new ListNode<>(prev , data , node);
-        prev.next = newNode;
         node.prev = newNode;
+        if (prev == null)
+            head = newNode;
+        else
+            prev.next = newNode;
         incrementSize();
     }
     private void linkAfter(T data , ListNode<T> node){
         ListNode<T> next = node.next;
         ListNode<T> newNode = new ListNode<>(node , data , next);
-        next.prev = newNode;
         node.next = newNode;
+        if (next == null)
+            tail = newNode;
+        else
+            next.prev = newNode;
         incrementSize();
     }
     /**
@@ -328,24 +311,11 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
         public ListItr(){
             cur = head;
         }
-        /**
-         * Returns {@code true} if the iteration has more elements.
-         * (In other words, returns {@code true} if {@link #next} would
-         * return an element rather than throwing an exception.)
-         *
-         * @return {@code true} if the iteration has more elements
-         */
         @Override
         public boolean hasNext () {
             return cur != null;
         }
 
-        /**
-         * Returns the next element in the iteration.
-         *
-         * @return the next element in the iteration
-         * @throws NoSuchElementException if the iteration has no more elements
-         */
         @Override
         public T next () {
             if (!hasNext()){
@@ -355,12 +325,7 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
             cur = cur.next;
             return data;
         }
-    }
-    /**
-     * Returns an iterator over the elements in this list in proper sequence.
-     *
-     * @return an iterator over the elements in this list in proper sequence
-     */
+    } // end of ListItr
     @Override
     public Iterator<T> iterator () {
         return new ListItr();
@@ -374,15 +339,5 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
         str.delete(str.length() - 2 , str.length());
         str.append("]");
         return str.toString();
-    }
-
-    public static void main (String[] args) {
-        DoublyLinkedList<Integer> integers = new DoublyLinkedList<>();
-        for (int i = 0; i < 10; i++) {
-            integers.addLast(i +1);
-        }
-        integers.addAt(10 , 0);
-        integers.addAt(11 , 5);
-        System.out.println(integers);
     }
 }
