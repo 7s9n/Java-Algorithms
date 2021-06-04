@@ -81,6 +81,15 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
      */
     @Override
     public boolean addAt (int idx, T value) {
+        if (!isValidPositionIndex(idx))
+            throw new IndexOutOfBoundsException(indexErrorMessage(idx));
+        if (idx == 0)
+            addFirst(value);
+        else if (idx == size)
+            addLast(value);
+        else {
+
+        }
         return false;
     }
 
@@ -186,6 +195,9 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
     private boolean isValidElementIndex(int index){
         return index >= 0 && index < size;
     }
+    private boolean isValidPositionIndex(int index){
+        return index >= 0 && index <= size;
+    }
     private String indexErrorMessage(int index){
         return "Index: " + index + ", Size: " + size;
     }
@@ -269,18 +281,10 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
         ListNode<T> next = m.next;
         ListNode<T> prev = m.prev;
         m.data = null;
-        if (prev == null)
-            head = next;
-        else{
-            prev.next = next;
-            m.prev = null;
-        }
-        if (next == null)
-            tail = prev;
-        else{
-            next.prev = prev;
-            m.next = null;
-        }
+        prev.next = next;
+        next.prev = prev;
+
+        m.next = m.prev = null;
         decrementSize();
         return data;
     }
@@ -332,10 +336,8 @@ public class DoublyLinkedList<T> implements LinkedList<T>{
         for (int i = 0; i < 1000; i++) {
             integers.addLast(i + 1);
         }
-        System.out.println("Removed at: " + integers.removeAt(1));
+        integers.removeAt(1);
         for (int i : integers)
             System.out.println(i);
-
-        System.out.println("Get at: " + integers.getAt(integers.size() - 1));
     }
 }
