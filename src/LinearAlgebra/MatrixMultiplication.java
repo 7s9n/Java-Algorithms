@@ -7,7 +7,8 @@ public class MatrixMultiplication {
     public static int[][] multiply(int[][] a , int[][] b){
         int aRows = a.length , aCols = a[0].length;
         int bRows = b.length , bCols = b[0].length;
-        if (aCols != bRows) return null; //The number of columns of the 1st matrix must equal the number of rows of the 2nd matrix.
+        if (aCols != bRows)
+            throw new IllegalArgumentException("The number of columns of the 1st matrix must equal the number of rows of the 2nd matrix.");
         //The result will have the same number of rows as the 1st matrix, and the same number of columns as the 2nd matrix.
         int[][] ans = new int[aRows][bCols];
         // Note : (matrix multiplication is not commutative).
