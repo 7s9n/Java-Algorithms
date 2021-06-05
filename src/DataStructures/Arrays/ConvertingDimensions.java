@@ -1,6 +1,5 @@
-package Other;
+package DataStructures.Arrays;
 
-import java.lang.reflect.Array;
 
 /**
  * M[i][j]=M[n*i+j] , where n is the number of cols.
