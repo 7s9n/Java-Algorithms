@@ -31,7 +31,7 @@ public class TransposeMatrix {
             return;
 
         for (int i = 0; i < r; i++) {
-            for (int j = i; j < c; j++){
+            for (int j = i + 1; j < c; j++){
                 int tmp = mat[j][i];
                 mat[j][i] = mat[i][j];
                 mat[i][j] = tmp;
