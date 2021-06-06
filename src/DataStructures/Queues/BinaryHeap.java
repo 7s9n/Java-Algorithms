@@ -1,99 +1,84 @@
 package DataStructures.Queues;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 
-public class BinaryHeap<T> implements Queue<T>{
+public class BinaryHeap<T> {
     // A dynamic list to track the elements inside the heap
-    private List<T> heap;
+    private final List<T> heap;
     // A dynamic list to track the elements inside the heap
-    private Comparator<? super T> comparator;
+    private final Comparator<? super T> comparator;
 
     public BinaryHeap(Comparator<? super T> comparator){
-        this();
         this.comparator = comparator;
-    }
-    public BinaryHeap(){
-        this.comparator = null;
         this.heap = new ArrayList<>();
     }
-
-    @Override
-    public void enqueue (T value) {
-        if (value == null)
-            throw new IllegalArgumentException();
-        this.heap.add(value);
-        bottomUp();
+    public int size(){
+        return this.heap.size();
     }
-
-    @Override
-    public T dequeue () {
-        if (isEmpty()) return null;
-        int lastElementIdx = heap.size() -1;
-        T removedElement = heap.get(0);
-        swap(lastElementIdx , 0);
-        heap.remove(lastElementIdx);
-        sinkUsingComparator(0);
-        return removedElement;
+    public void add(T data){
+        this.heap.add(data);
+        this.swim();
     }
-
-    @Override
-    public T peek () {
-        return heap.get(0);
+    public T poll(){
+        T toBeRemoved = this.heap.get(0);
+        swap(0 , size() -1);
+        heap.remove(size() - 1);
+        this.sink();
+        return toBeRemoved;
     }
-
-    @Override
-    public int size () {
-        return heap.size();
-    }
-
-    @Override
-    public boolean isEmpty () {
-        return heap.isEmpty();
-    }
-    private void bottomUp(){
-        int k = this.size() -1;
-        if (comparator != null)
-            swimUsingComparator(k);
-        else
-            swimUsingComparable(k , heap.get(k));
-    }
-    // heapifyUp
-    private void swimUsingComparator(int k){
-        int pi = (k - 1) / 2; // Parent index.
-        while (pi > 0 && comparator.compare( heap.get(pi) , heap.get(k) ) <= 0){
-            swap(pi , k); // swap pi with k.
-            k = pi;
-            pi = (k - 1) / 2; // the next parent index.
+    private void sink () {
+        int index = 0;
+        while (hasLeft(index)){
+            int swapped = getLeftIdx(index);
+            if (hasRight(index) && comparator.compare(right(index) , left(index)) < 0) swapped = getRightIdx(index);
+            if (comparator.compare(heap.get(index) , heap.get(swapped)) > 0)
+                swap(index , swapped);
+            else break;
+            index = swapped;
         }
     }
-    // heapifyUp
-    private void swimUsingComparable(int k , T child){
-        int pi = (k - 1) / 2; // Parent index.
-        Comparable<? super T> key = (Comparable<? super T>) heap.get(pi);
-        while (k > 0 && key.compareTo(child) == 1){
-            swap(pi , k); // swap pi with k.
-            k = pi;
-            pi = (k - 1) / 2;
+
+    private void swim(){
+        int index = size() - 1;
+        while (hasParent(index) && comparator.compare(parent(index) , heap.get(index))  > 0){
+            swap(getParentIdx(index) , index);
+            index = getParentIdx(index);
         }
     }
-    private void  sinkUsingComparator(int k){
-        int heapSize = size();
-        while (true){
-            int l = 2 * k + 1;
-            int r = 2 * k + 2;
-            int swapped = l;
-
-            if (r < heapSize && comparator.compare(heap.get(r) , heap.get(swapped)) >= 1) swapped = r;
-
-            if (l >= heapSize ) break;
-
-            swap(swapped , k);
-            k = swapped;
-        }
+    private T left(int index){
+        return heap.get( getLeftIdx(index) );
     }
+    private T right(int index){
+        return heap.get( getRightIdx(index) );
+    }
+    private T parent(int index){
+        return heap.get( getParentIdx(index) );
+    }
+
+    private int getParentIdx(int child){
+        return (child - 1) / 2;
+    }
+    private int getLeftIdx(int pi){
+        return (2 * pi + 1);
+    }
+    private int getRightIdx(int pi){
+        return (2 * pi + 2);
+    }
+
+    private boolean hasParent(int idx){
+        return getParentIdx(idx) >= 0;
+    }
+    private boolean hasLeft(int index){
+        return getLeftIdx(index) < size();
+    }
+    private boolean hasRight(int index){
+        return getRightIdx(index) < size();
+    }
+
     private void swap(int i , int j){
         T elementAtI = heap.get(i);
         T elementAtJ = heap.get(j);
@@ -105,15 +90,7 @@ public class BinaryHeap<T> implements Queue<T>{
     }
 
     public static void main (String[] args) {
-        BinaryHeap<Integer> binaryHeap = new BinaryHeap<>();
-        binaryHeap.enqueue(1);
-        binaryHeap.enqueue(2);
-        binaryHeap.enqueue(8);
-        binaryHeap.enqueue(3);
-        binaryHeap.enqueue(4);
-        binaryHeap.enqueue(5);
-        binaryHeap.enqueue(6);
-        //binaryHeap.dequeue();
-        binaryHeap.print();
+        BinaryHeap<Integer> binaryHeap = new BinaryHeap<>((x , y)-> y - x);
+
     }
 }

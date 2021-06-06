@@ -12,11 +12,11 @@ public class HeapSort implements SortingAlgorithm{
         buildHeap(array , c);
     }
 
-    private <T>  void buildHeap(T[] array , Comparator<T> c){
+    private <T> void buildHeap(T[] array , Comparator<T> c){
         int n = array.length;
         // ( n / 2 ) -1 is the last non leaf node.
         for (int i = (n / 2) -1; i >= 0; --i)
-            sink(array , n , i , c); //sink(array , n , i);
+            sink(array , n , i , c);
         extract(array , c);
     }
     private <T> void sink(T[] array , int heapSize , int k , Comparator<T> c){
