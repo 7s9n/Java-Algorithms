@@ -87,9 +87,4 @@ public class BinaryHeap<T> {
     private void print(){
         System.out.println(heap);
     }
-
-    public static void main (String[] args) {
-        BinaryHeap<Integer> binaryHeap = new BinaryHeap<>((x , y)-> y - x);
-
-    }
 }
