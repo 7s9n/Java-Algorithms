@@ -1,5 +1,7 @@
 package Sorts;
 
+import java.util.Arrays;
+
 /**
  * This class contains helper method for sorting algorithms.
  */
@@ -15,6 +17,10 @@ public class SortingUtils {
         T tmp = array[i];
         array[i] = array[j];
         array[j] = tmp;
+    }
+
+    public static <T> void print(T[] array){
+        System.out.println(Arrays.toString(array));
     }
 
     /**

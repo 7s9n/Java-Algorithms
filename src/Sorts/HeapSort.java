@@ -5,7 +5,20 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.stream.IntStream;
 
-
+/**
+ * Heap Sort
+ *
+ * Time Complexity:
+ * Best    :  O( nlog(n) )
+ * Average :  O( nlog(n) )
+ * Worst   :  O( nlog(n) )
+ *--------------------
+ * Space Complexity:
+ * Worst   :  O(1)
+ *--------------------
+ * Common implementations
+ *
+ */
 public class HeapSort implements SortingAlgorithm{
     @Override
     public <T> void sort (T[] array, Comparator<? super T> c) {

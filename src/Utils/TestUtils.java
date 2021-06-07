@@ -23,4 +23,31 @@ public class TestUtils {
     public static int getRandomInt(int lowerBound , int upperBound){
         return lowerBound + random.nextInt(upperBound + 1 - lowerBound);
     }
+    //generate random number between [lowerBound - upperBound] inclusive.
+    private static char getRandomChar(char lowerBound , char upperBound){
+        return (char) (lowerBound + random.nextInt(upperBound + 1 - lowerBound));
+    }
+    /** Generate a random lowercase letter */
+    public static char getRandomLowerCase(){
+        return getRandomChar('a' , 'z');
+    }
+
+    /** Generate a random lowercase letter */
+    public static char getRandomUpperCase(){
+        return getRandomChar('A' , 'Z');
+    }
+    public static Character[] getUpperCaseCharacterArray(int size){
+        return IntStream
+                .generate(TestUtils::getRandomUpperCase)
+                .limit(size)
+                .mapToObj(c-> Character.valueOf((char) c))
+                .toArray(Character[]::new);
+    }
+    public static Character[] getLowerCaseCharacterArray(int size){
+        return IntStream
+                .generate(TestUtils::getRandomLowerCase)
+                .limit(size)
+                .mapToObj(c-> Character.valueOf((char) c))
+                .toArray(Character[]::new);
+    }
 }

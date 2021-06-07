@@ -32,18 +32,17 @@ public class MatrixDeterminant {
             return a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g);
         }
         int det = 0;
-        //this loop will do a column-column scan on the first row of the matrix that, because we chose the first row as the fixed pivot.
         for (int[] ints : matrix) {
             for (int j = 0; j < n; j++) {
                 int c = ints[j];
-                /**
+                /*
                  * Checks if the pivot element is non-zero to be able to do all the calculation.
                  * If the element is zero, there is no need to do the calculation after all the product will go to zero.
                  * We won't need to do the partial sum of zero either, since zero added does not influence the result.
                  */
                 if (c != 0){
                     int[][] newMatrix = buildMatrix(matrix, j);
-                    int sign = ((j & 1) == 0) ? +1 : -1;
+                    int sign = ((j & 1) == 0) ? +1 : -1; // j % 2 == 0 you can use mod operator but & is faster.
                     det += sign * c * laplace(newMatrix);
                 }
             } // end of inner loop.
@@ -137,23 +136,22 @@ public class MatrixDeterminant {
                 {1 , 2 , 4 , 8 , 6 , 3 , 4 , 8 , 0 , 2},
                 {2 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 1},
                 {5 , 2 , 3 , 4 , 8 , 9 , 1 , 9 , 8 , 3},
-                {0 , 0 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0},
-                {1 , 0 , 0 , 1 , 0 , 0 , 0 , 0 , 0 , 0},
-                {1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0},
-                {1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0},
-                {1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0},
-                {1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0},
-                {1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0}
-        }; // det(mat0) = --- // take all the day
+                {1 , 1 , 1 , 6 , 4 , 2 , 5 , 9 , 8 , 7},
+                {9 , 5 , 0 , 1 , 2 , 0 , 6 , 0 , 0 , 0},
+                {8 , 4 , 0 , 1 , 2 , 3 , 4 , 5 , 8 , 4},
+                {7 , 3 , 3 , 6 , 7 , 8 , 9 , 1 , 7 , 3},
+                {1 , 2 , 4 , 0 , 0 , 0 , 0 , 3 , 5 , 2},
+                {1 , 1 , 0 , 4 , 5 , 0 , 0 , 4 , 2 , 1},
+                {1 , 0 , 0 , 0 , 9 , 0 , 0 , 1 , 1 , 6}
+        }; // det(mat0) = --- , 2 hour and the program's still running... I'll turn it off , lol
         Instant start = Instant.now();
-
-        //System.out.println(det(mat1));
-        //System.out.println(det(mat2));
-        //System.out.println(det(mat3));
-        //System.out.println(det(mat4));
-        //System.out.println(det(mat5));
-        //System.out.println(det(mat6));
-        //System.out.println(det(mat7));
+        System.out.println(det(mat1));
+        System.out.println(det(mat2));
+        System.out.println(det(mat3));
+        System.out.println(det(mat4));
+        System.out.println(det(mat5));
+        System.out.println(det(mat6));
+        System.out.println(det(mat7));
         System.out.println(det(mat0));
         Instant finish = Instant.now();
         System.out.println("Elapsed time: " + Duration.between(start , finish).toSeconds() + " seconds");
