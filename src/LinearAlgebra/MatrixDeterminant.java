@@ -1,5 +1,9 @@
 package LinearAlgebra;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Arrays;
+
 public class MatrixDeterminant {
     public static int det(int[][] matrix){
         int n = matrix.length;
@@ -28,12 +32,20 @@ public class MatrixDeterminant {
             return a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g);
         }
         int det = 0;
+        //this loop will do a column-column scan on the first row of the matrix that, because we chose the first row as the fixed pivot.
         for (int[] ints : matrix) {
             for (int j = 0; j < n; j++) {
                 int c = ints[j];
-                int[][] newMatrix = buildMatrix(matrix, j);
-                int sign = ((j & 1) == 0) ? +1 : -1;
-                det += sign * c * laplace(newMatrix);
+                /**
+                 * Checks if the pivot element is non-zero to be able to do all the calculation.
+                 * If the element is zero, there is no need to do the calculation after all the product will go to zero.
+                 * We won't need to do the partial sum of zero either, since zero added does not influence the result.
+                 */
+                if (c != 0){
+                    int[][] newMatrix = buildMatrix(matrix, j);
+                    int sign = ((j & 1) == 0) ? +1 : -1;
+                    det += sign * c * laplace(newMatrix);
+                }
             } // end of inner loop.
         } // end of outer loop.
         return det;
@@ -56,28 +68,32 @@ public class MatrixDeterminant {
                 newMatrix[currentRow][currentCol++] = matrix[i][j];
             } // end of inner loop
         } // end of outer loop
+        //printMatrix(newMatrix); // to see the new matrix after removing  .
         return newMatrix;
     } // end of buildMatrix.
-
+    private static void printMatrix(int[][] mat){
+        for (int[] row : mat)
+            System.out.println(Arrays.toString(row));
+    }
     public static void main (String[] args) {
         int[][] mat1 = new int[][]{
                 {1 , 3 , 5 , 9},
                 {1 , 3 , 1 , 7},
                 {4 , 3 , 9 , 7},
                 {5 , 2 , 0 , 9},
-        }; // det(mat1) = -376
+        }; // det(mat1) = -376 , mat(4 * 4)
         int[][] mat2 = new int[][]{
                 {1 , 3 , 5 , 4},
                 {2 , 3 , 1 , 3},
                 {4 , 3 , 9 , 7},
                 {5 , 2 , 6 , 9},
-        }; // det(mat2) = -152
+        }; // det(mat2) = -152 , mat(4 * 4)
         int[][] mat3 = new int[][]{
                 {4 , 7 , 2 , 3},
                 {1 , 3 , 1 , 2},
                 {2 , 5 , 3 , 4},
                 {1 , 4 , 2 , 3},
-        }; // det(mat3) = -3
+        }; // det(mat3) = -3 , mat(4 * 4)
         int[][] mat4 = new int[][]{
                 {1 , 0 , 0 , 0 , 0 , 2},
                 {0 , 1 , 0 , 0 , 2 , 0},
@@ -85,7 +101,7 @@ public class MatrixDeterminant {
                 {0 , 0 , 2 , 1 , 0 , 0},
                 {0 , 2 , 0 , 0 , 1 , 0},
                 {2 , 0 , 0 , 0 , 0 , 1},
-        }; // det(mat4) = -27
+        }; // det(mat4) = -27 , mat(6 * 6)
         int[][] mat5 = new int[][]{
                 {1 , 1 , 9 , 3 , 1 , 2 , 3},
                 {9 , 1 , 8 , 4 , 2 , 3 , 1},
@@ -94,8 +110,30 @@ public class MatrixDeterminant {
                 {5 , 3 , 1 , 3 , 1 , 5 , 3},
                 {2 , 7 , 9 , 5 , 0 , 1 , 2},
                 {2 , 1 , 3 , 8 , 9 , 1 , 4}
-        }; // det(mat4) = -27
+        }; // det(mat5) = 66704 mat(7 * 7)
         int[][] mat6 = new int[][]{
+                {1 , 1 , 9 , 3 , 1 , 2 , 3 , 9},
+                {9 , 1 , 8 , 4 , 2 , 3 , 1 , 8},
+                {3 , 2 , 7 , 2 , 9 , 5 , 5 , 7},
+                {4 , 6 , 2 , 1 , 7 , 9 , 6 , 6},
+                {5 , 3 , 1 , 3 , 1 , 5 , 3 , 5},
+                {2 , 7 , 9 , 5 , 0 , 1 , 2 , 4},
+                {2 , 1 , 3 , 8 , 9 , 1 , 4 , 3},
+                {6 , 1 , 6 , 7 , 9 , 1 , 4 , 2}
+        }; // det(mat6) = -39240 , mat(8 * 8)
+        // from mat7 this will take some time to get the result
+        int[][] mat7 = new int[][]{
+                {1 , 1 , 9 , 3 , 1 , 2 , 3 , 9 , 1},
+                {9 , 1 , 8 , 4 , 2 , 3 , 1 , 8 , 2},
+                {3 , 2 , 7 , 2 , 9 , 5 , 5 , 7 , 3},
+                {4 , 6 , 2 , 1 , 7 , 9 , 6 , 6 , 4},
+                {5 , 3 , 1 , 3 , 1 , 5 , 3 , 5 , 5},
+                {2 , 7 , 9 , 5 , 0 , 1 , 2 , 4 , 6},
+                {2 , 1 , 3 , 8 , 9 , 1 , 4 , 3 , 7},
+                {6 , 1 , 6 , 7 , 9 , 1 , 4 , 2 , 8},
+                {9 , 8 , 7 , 4 , 3 , 3 , 4 , 2 , 9}
+        }; // det(mat7) = 1910870 , mat( 9 * 9)  Elapsed time: 1012 seconds , 16.86667 minutes
+        int[][] mat0 = new int[][]{
                 {1 , 2 , 4 , 8 , 6 , 3 , 4 , 8 , 0 , 2},
                 {2 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 1},
                 {5 , 2 , 3 , 4 , 8 , 9 , 1 , 9 , 8 , 3},
@@ -106,12 +144,18 @@ public class MatrixDeterminant {
                 {1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0},
                 {1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0},
                 {1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0}
-        }; // det(mat5) = -27
-        System.out.println(det(mat1));
-        System.out.println(det(mat2));
-        System.out.println(det(mat3));
-        System.out.println(det(mat4));
-        System.out.println(det(mat5));
-        System.out.println(det(mat6));
+        }; // det(mat0) = --- // take all the day
+        Instant start = Instant.now();
+
+        //System.out.println(det(mat1));
+        //System.out.println(det(mat2));
+        //System.out.println(det(mat3));
+        //System.out.println(det(mat4));
+        //System.out.println(det(mat5));
+        //System.out.println(det(mat6));
+        //System.out.println(det(mat7));
+        System.out.println(det(mat0));
+        Instant finish = Instant.now();
+        System.out.println("Elapsed time: " + Duration.between(start , finish).toSeconds() + " seconds");
     }
 }
