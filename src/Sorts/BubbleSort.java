@@ -1,12 +1,6 @@
 package Sorts;
-
-import java.util.Arrays;
 import java.util.Comparator;
-
-import static Sorts.SortingUtils.print;
 import static Sorts.SortingUtils.swap;
-import static Utils.TestUtils.getLowerCaseCharacterArray;
-import static Utils.TestUtils.getUpperCaseCharacterArray;
 /**
  * Bubble  Sort
  *
