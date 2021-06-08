@@ -50,4 +50,12 @@ public class TestUtils {
                 .mapToObj(c-> Character.valueOf((char) c))
                 .toArray(Character[]::new);
     }
+    public static int[][] getRandomMatrix(int r , int c){
+        int[][] mat = new int[r][c];
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++)
+                mat[i][j] = getRandomInt(1 , 9);
+        } // end outer loop
+        return mat;
+    }
 }

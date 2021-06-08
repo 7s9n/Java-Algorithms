@@ -74,7 +74,7 @@ public class MatrixInverse {
         if (n == 1)
             throw new IllegalArgumentException("Matrix is a vector");
         if (n == 2){
-            // Compute inverse matrix elements
+            // Compute inverse matrix elements 2*2 matrix
             float[][] ans = new float[n][n]; // Collect the results into a new matrix
             ans[0][0] = (float)mat[1][1] / det;
             ans[0][1] = (float)-mat[0][1] / det;

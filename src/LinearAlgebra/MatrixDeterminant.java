@@ -3,7 +3,7 @@ package LinearAlgebra;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
-
+import static Utils.TestUtils.getRandomMatrix;
 public class MatrixDeterminant {
     public static int det(int[][] matrix){
         int n = matrix.length;
@@ -43,7 +43,7 @@ public class MatrixDeterminant {
     }
 
     /**
-     * This method exclude first row and current column then construct a new matrix ,
+     * This method exclude given row and column then construct a new matrix ,
      * without the excluded row and column.
      * The Laplace expansion is computationally inefficient for high dimension matrices.
      */
@@ -135,7 +135,7 @@ public class MatrixDeterminant {
                 {1 , 1 , 0 , 4 , 5 , 0 , 0 , 4 , 2 , 1},
                 {1 , 0 , 0 , 0 , 9 , 0 , 0 , 1 , 1 , 6}
         }; // det(mat0) = 17265530
-
+        int[][] mat11 = getRandomMatrix(13, 13);
         Instant start = Instant.now();
         System.out.println(det(mat1));
         System.out.println(det(mat2));
@@ -145,6 +145,7 @@ public class MatrixDeterminant {
         System.out.println(det(mat6));
         System.out.println(det(mat7));
         System.out.println(det(mat0));
+        System.out.println(det(mat11));
         Instant finish = Instant.now();
         System.out.println("Elapsed time: " + Duration.between(start , finish).toSeconds() + " seconds");
     }
