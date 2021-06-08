@@ -135,7 +135,7 @@ public class MatrixDeterminant {
                 {1 , 1 , 0 , 4 , 5 , 0 , 0 , 4 , 2 , 1},
                 {1 , 0 , 0 , 0 , 9 , 0 , 0 , 1 , 1 , 6}
         }; // det(mat0) = 17265530
-        int[][] mat11 = getRandomMatrix(13, 13);
+        int[][] mat11 = getRandomMatrix(13, 13); // for 13 * 13 it took 381 seconds , 6.35 minutes
         Instant start = Instant.now();
         System.out.println(det(mat1));
         System.out.println(det(mat2));
