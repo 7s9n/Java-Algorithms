@@ -49,11 +49,4 @@ public class MergeSort implements SortingAlgorithm{
 
         return right;
     }
-
-    public static void main (String[] args) {
-        Character[] array = getUpperCaseCharacterArray(500);
-        MergeSort mergeSort = new MergeSort();
-        mergeSort.sort(array , Character::compare);
-        print(array);
-    }
 }
