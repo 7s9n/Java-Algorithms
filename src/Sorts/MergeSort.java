@@ -3,17 +3,20 @@ package Sorts;
 
 import java.lang.reflect.Array;
 import java.util.Comparator;
-
+import static Utils.TestUtils.*;
+import static Sorts.SortingUtils.*;
 public class MergeSort implements SortingAlgorithm{
     @Override
     public <T> void sort (T[] array, Comparator<? super T> c) {
         if (array == null || c == null)
             throw new IllegalArgumentException();
+        // Base case is when a single element (which is already sorted)
         if (array.length > 1){
             T[] left = leftHalf(array);
             T[] right = rightHalf(array);
             sort(left , c);
             sort(right , c);
+            // Combine the two arrays into one larger array
             merge(array , left , right , c);
         }// end of if statement
     }
@@ -45,5 +48,12 @@ public class MergeSort implements SortingAlgorithm{
             right[i] = array[i + mid];
 
         return right;
+    }
+
+    public static void main (String[] args) {
+        Character[] array = getUpperCaseCharacterArray(500);
+        MergeSort mergeSort = new MergeSort();
+        mergeSort.sort(array , Character::compare);
+        print(array);
     }
 }
