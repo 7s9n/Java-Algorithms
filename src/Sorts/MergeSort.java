@@ -3,8 +3,7 @@ package Sorts;
 
 import java.lang.reflect.Array;
 import java.util.Comparator;
-import static Utils.TestUtils.*;
-import static Sorts.SortingUtils.*;
+
 public class MergeSort implements SortingAlgorithm{
     @Override
     public <T> void sort (T[] array, Comparator<? super T> c) {
