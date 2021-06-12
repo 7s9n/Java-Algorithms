@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReadingFiles {
     public static String readFileV1(String fileName){
@@ -16,6 +17,7 @@ public class ReadingFiles {
         StringBuilder sb = new StringBuilder();
         try{
             List<String> alLines = Files.readAllLines(path);
+            //sb.append(alLines.stream().collect(Collectors.joining()));
             for (String line : alLines)
                 sb.append(line).append('\n');
         }catch (IOException e){
@@ -78,6 +80,31 @@ public class ReadingFiles {
 
         System.out.println("\n\nRead text file via BufferedReader with charset:");
         System.out.println("----------------------------------------------------");
+        try(BufferedReader brCh = new BufferedReader(new FileReader(arabicFile.toFile() , StandardCharsets.UTF_8))){
+            String line;
+            while ((line = brCh.readLine()) != null)
+                System.out.println(line);
+        }// end of Read text file via BufferedReader with charset
+        System.out.println("\n\n----------------------------------------------------");
+        try(BufferedReader brCh = Files.newBufferedReader(arabicFile , StandardCharsets.UTF_8)){
+            String line;
+            while ((line = brCh.readLine()) != null)
+                System.out.println(line);
+        }
+        System.out.println("\n\n----------------------------------------------------");
+        try(BufferedReader brCh = new BufferedReader(new InputStreamReader(new FileInputStream(arabicFile.toFile()) , StandardCharsets.UTF_8))){
+            String line;
+            while ((line = brCh.readLine()) != null)
+                System.out.println(line);
+        }
+        System.out.println("\n\nRead text file in memory via Files.readAllLines() with charset:");
+        System.out.println("-------------------------------------------------------------------");
+        List<String> allLines = Files.readAllLines(arabicFile);
+        allLines.forEach(System.out::println); // or see the readFileV1 function up
 
+        System.out.println("\n\nRead text file in memory via Files.readString() with charset:");
+        System.out.println("-------------------------------------------------------------------");
+        String content = Files.readString(arabicFile, StandardCharsets.UTF_8);
+        System.out.println(content);
     }
 }
