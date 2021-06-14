@@ -61,6 +61,18 @@ public class FindTheTownJudge {
         return -1;
     }
 
+    public static int findJudgeV2(int n, int[][] trust) {
+        int[] visited = new int[n + 1];
+        for (int[] arr : trust){
+            visited[arr[0]]--; // out going edge
+            visited[arr[1]]++; // incoming edge
+        }
+        for(int i = 1; i <= n; ++i){
+            if (visited[i] == n - 1)
+                return i;
+        }
+        return -1;
+    }
     public static void main (String[] args) {
         int [][] trust = new int[][]{
                 {1 , 3} ,
