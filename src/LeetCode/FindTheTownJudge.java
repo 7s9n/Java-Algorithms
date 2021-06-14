@@ -48,14 +48,14 @@ package LeetCode;
 public class FindTheTownJudge {
     public static int findJudge(int n, int[][] trust) {
         if (n == 1) return 1;
-        int [] leftOccurrence =  new int [n+1];
-        int [] rightOccurrence  = new int[n+1];
+        int [] outDegree =  new int [n+1];
+        int [] inDegree  = new int[n+1];
         for (int[] arr : trust){
-            leftOccurrence[arr[0]] += 1;
-            rightOccurrence[arr[1]] += 1;
+            outDegree[arr[0]] += 1;
+            inDegree[arr[1]] += 1;
         }
         for(int i = 1; i <= n; ++i){
-            if(leftOccurrence[i] == 0 && rightOccurrence [i] == n - 1)
+            if(outDegree[i] == 0 && inDegree[i] == n - 1)
                 return i;
         }
         return -1;
