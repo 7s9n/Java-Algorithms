@@ -32,7 +32,7 @@ import java.util.*;
  * All the pairs prerequisites[i] are unique.
  */
 public class CourseSchedule {
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
+    public static boolean canFinish(int numCourses, int[][] prerequisites) {
         //do top sort, use numCourses to prefill inDegree
 
         if(prerequisites == null || prerequisites.length == 0) return true;
@@ -57,7 +57,7 @@ public class CourseSchedule {
             inDegree.compute(to , (k , v)-> v == null ? 1 : v + 1);
         }
 
-        //find the 0 indegrees nodes
+        //find the 0 inDegree nodes
 
         Queue<Integer> toVisit = new LinkedList<>();
 
@@ -86,5 +86,9 @@ public class CourseSchedule {
             }
         }
         return coursesTaken == numCourses;
+    }
+
+    public static void main (String[] args) {
+        System.out.println(canFinish(2 , new int[][]{{1 , 0} , {0 , 1}}));
     }
 }
