@@ -20,7 +20,7 @@ import java.util.LinkedList;
  */
 
 public class TopologicalOrdering {
-    public static <T> Map<T , Integer> getInDegree(Map<T , List<T>> container){
+    private static <T> Map<T , Integer> getInDegree(Map<T , List<T>> container){
         Map<T , Integer> inDegree = new HashMap<>();
         for (T v : container.keySet()){
             List<T> adjacentVertices = container.get(v);
@@ -89,8 +89,21 @@ public class TopologicalOrdering {
         graph.addEdge(12 , 8);
 
         var order = topologicalOrdering(graph.getContainer()); //0 9 13 3 2 10 1 6 7 11 4 12 5 8
-        for (int v : order){
-            System.out.print(v + " ");
-        }
+        System.out.println(order);
+
+        MapGraph<Integer> graph2 = new MapGraph<>();
+        graph2.addEdge(4 , 0);
+        graph2.addEdge(5 , 0);
+        graph2.addEdge(5 , 2);
+        graph2.addEdge(4 , 1);
+        graph2.addEdge(3 , 1);
+        graph2.addEdge(2 , 3);
+
+
+
+
+        var order2 = topologicalOrdering(graph2.getContainer());
+        System.out.println(order2);
+
     }
 }
