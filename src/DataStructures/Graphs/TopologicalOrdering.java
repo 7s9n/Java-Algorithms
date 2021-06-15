@@ -45,6 +45,9 @@ public class TopologicalOrdering {
             if (inDegree.get(v) == null)
                 queue.add(v);
         }
+        if (queue.isEmpty()){
+            throw new IllegalArgumentException();
+        }
         List<T> order = new LinkedList<>();
         while (!queue.isEmpty()) {
             // remove a vertex from the front of the queue and add it to the topological ordering.
