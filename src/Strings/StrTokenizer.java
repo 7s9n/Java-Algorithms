@@ -25,10 +25,9 @@ public class StrTokenizer {
             return null;
         try( BufferedReader br = Files.newBufferedReader(path) ){
             String currLine;
-            while ( ( currLine = br.readLine() ) != null ){
+            while ( ( currLine = br.readLine() ) != null )
                 tokens.add( getTokens(currLine , delimiter) );
-            }
-        } catch (IOException e) {
+        } catch (IOException e){
             return null;
         }
         return tokens;
@@ -39,7 +38,7 @@ public class StrTokenizer {
         var data = csvReader(path , delimiter);
         if ( data != null ){
             for (List<String> row : data)
-                System.out.println(row.get(0));
+                System.out.println(row.get(2));
         }
     }
 }
