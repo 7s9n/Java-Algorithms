@@ -5,6 +5,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Arrays;
+
 public class FilterFiles {
     public static void main (String[] args) throws IOException {
         Path path = Paths.get("C:/Users/Hussein Sarea/Desktop");

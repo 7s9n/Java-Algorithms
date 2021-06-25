@@ -41,6 +41,9 @@ public class MapGraph <T extends Comparable<T>>{
         }
         return false;
     }
+    public boolean contains(T v){
+        return container.containsKey(v);
+    }
 
     public Map<T, List<T>> getContainer () {
         return Collections.unmodifiableMap(container);
