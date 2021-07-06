@@ -50,6 +50,6 @@ public class BreadthFirstSearch<T extends Comparable<T>> {
         g.add(2, 0);
         g.add(2, 3);
         g.add(3, 3);
-        System.out.println(g.bfs(2));
+        System.out.println(g.bfs(1));
     }
 }

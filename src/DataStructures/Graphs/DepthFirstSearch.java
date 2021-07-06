@@ -22,16 +22,16 @@ public class DepthFirstSearch<T extends Comparable<T>> {
         List<T> dfsTraversal = new ArrayList<>();
 
         stack.add(start);
-        visited.add(start);
+
         while (!stack.empty()){
             T vertex = stack.pop();
+            visited.add(vertex);
             dfsTraversal.add(vertex);
             List<T> adjacentVertices = graphContainer.get(vertex);
 
             if (adjacentVertices != null){
                 for (T adjacentVertex : adjacentVertices){
                     if (!visited.contains(adjacentVertex)){
-                        visited.add(adjacentVertex);
                         stack.add(adjacentVertex);
                     }
                 }
@@ -62,7 +62,7 @@ public class DepthFirstSearch<T extends Comparable<T>> {
         g.add(2, 3);
         g.add(3, 3);
 
-        System.out.println(g.dfs(2));
+        System.out.println(g.dfs(1));
         System.out.println(g.countComponent());
     }
 }
